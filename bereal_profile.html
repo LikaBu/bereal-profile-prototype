@@ -746,9 +746,12 @@ function shuffleProfileImages(){
   }
 }
 function showScreen(id){
+  var brd=document.getElementById('br-detail');
+  if(brd&&brd.classList.contains('open'))closeBeRealDetail();
   var screenId=id==='nonfriend-private'?'nonfriend':id;
   document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('on');});
   var activeScreen=document.querySelector('#s-'+screenId);
+  if(!activeScreen)return;
   activeScreen.classList.add('on');
   activeScreen.scrollTop=0;
   document.querySelectorAll('.sw').forEach(function(b){b.classList.remove('on');});

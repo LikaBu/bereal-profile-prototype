@@ -254,7 +254,15 @@ body{background:#0d0d0d;display:flex;flex-direction:column;align-items:center;pa
 .gi-avlbl{margin-left:9px;font-size:var(--body-xs-size);line-height:var(--body-xs-line);font-weight:500;color:rgba(255,255,255,.9);}
 .gi-acts{display:none;position:absolute;right:10px;bottom:16px;flex-direction:column;align-items:center;gap:18px;z-index:3;}
 .grd.g1 .gi-acts{display:flex;}
-.gi-act{background:none;border:none;padding:0;cursor:pointer;color:rgba(255,255,255,.9);font-size:22px;line-height:1;display:flex;}
+.gi-act{background:none;border:none;padding:0;cursor:pointer;color:rgba(255,255,255,.9);font-size:22px;line-height:1;display:flex;align-items:center;justify-content:center;}
+.gi-act img{width:27px;height:auto;display:block;pointer-events:none;}
+.tab .ti-tb{display:block;object-fit:contain;opacity:.35;}
+.tab.on .ti-tb{opacity:1;}
+.tbar.tb-figma .tab .ti-tb{opacity:1;}
+.tab .ti-tb.tb-ico-home{width:22px;height:22px;}
+.tab .ti-tb.tb-ico-friends{width:26px;height:22px;}
+.tab .ti-tb.tb-ico-send{width:22px;height:22px;}
+.camb .ti-tb.tb-ico-cam{width:26px;height:26px;position:relative;z-index:1;display:block;}
 /* Tab bar */
 .home-indicator{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:134px;height:5px;border-radius:3px;background:#fff;z-index:210;pointer-events:none;}
 .tbar{position:absolute;bottom:24px;left:10px;right:10px;display:flex;align-items:center;padding:0 3px;height:55px;background:rgba(29,29,30,.82);backdrop-filter:blur(28px) saturate(1.5);-webkit-backdrop-filter:blur(28px) saturate(1.5);border:.5px solid rgba(255,255,255,.1);border-radius:100px;z-index:50;}
@@ -616,7 +624,7 @@ body{background:#0d0d0d;display:flex;flex-direction:column;align-items:center;pa
   <div style="height:100px"></div>
 </div></div></div>
   <div class="home-indicator"></div>
-  <div class="tbar tb-figma"><div class="tab"><i class="fas fa-house"></i><span class="tl">Home</span></div><div class="tab"><i class="fas fa-user-group"></i><span class="tl">Friends</span></div><div class="camb"><i class="fas fa-camera"></i></div><div class="tab"><i class="fas fa-paper-plane"></i><span class="tl">Chat</span></div><div class="tab on"><div class="tb-av"><img src="selfies_assets/CleanShot%202026-04-15%20at%2013.26.14%402x.png"></div><span class="tl">Profile</span></div></div><div class="bsh-bd" id="bsh-bd" onclick="closeSheet()"></div>
+  <div class="tbar tb-figma"><div class="tab"><img class="ti-tb tb-ico-home" src="tab%20bar%20icons/home.svg" width="22" height="22" alt="" aria-hidden="true"><span class="tl">Home</span></div><div class="tab"><img class="ti-tb tb-ico-friends" src="tab%20bar%20icons/Friends.svg" width="26" height="22" alt="" aria-hidden="true"><span class="tl">Friends</span></div><div class="camb"><img class="ti-tb tb-ico-cam" src="tab%20bar%20icons/Camera.svg" width="26" height="26" alt="" aria-hidden="true"></div><div class="tab"><img class="ti-tb tb-ico-send" src="tab%20bar%20icons/send.svg" width="22" height="22" alt="" aria-hidden="true"><span class="tl">Chat</span></div><div class="tab on"><div class="tb-av"><img src="selfies_assets/CleanShot%202026-04-15%20at%2013.26.14%402x.png"></div><span class="tl">Profile</span></div></div><div class="bsh-bd" id="bsh-bd" onclick="closeSheet()"></div>
 <div class="bsheet" id="bsheet">
   <div class="bsh-handle"></div>
   <button type="button" class="bsh-close" onclick="closeSheet()" aria-label="Close"><svg class="bsh-close-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M7 7l10 10M17 7L7 17" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
@@ -1252,7 +1260,7 @@ function enrichGridItems(){
     // Append action stack (shown only in g1 via CSS)
     var acts=document.createElement('div');
     acts.className='gi-acts';
-    acts.innerHTML='<button class="gi-act"><i class="fas fa-paper-plane"></i></button><button class="gi-act"><i class="fas fa-comment"></i></button><button class="gi-act"><i class="fas fa-face-smile"></i></button>';
+    acts.innerHTML='<button type="button" class="gi-act" aria-label="Send"><img src="biggest%20view%20actions/send.svg" alt=""></button><button type="button" class="gi-act" aria-label="Comment"><img src="biggest%20view%20actions/Comment.svg" alt=""></button><button type="button" class="gi-act" aria-label="React"><img src="biggest%20view%20actions/Smile.svg" alt=""></button>';
     gi.appendChild(acts);
   });
 }

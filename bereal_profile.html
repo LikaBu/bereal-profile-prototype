@@ -131,6 +131,7 @@ body{background:#0d0d0d;display:flex;flex-direction:column;align-items:center;pa
 #s-friend .act{padding:14px 16px;}
 .a2-following i{color:#30D158;}
 #s-nonfriend .a2{color:#fff;}
+.a2>.a2-ico{width:var(--body-s-size);height:var(--body-s-size);object-fit:contain;display:block;pointer-events:none;}
 .dv{height:.5px;background:rgba(255,255,255,.07);}
 .sh{display:flex;align-items:center;justify-content:space-between;padding:18px 20px 13px;}
 .sh-t{font-family:var(--font-title);font-size:var(--title-xs-size);line-height:var(--title-xs-line);font-weight:700;letter-spacing:var(--title-xs-track);color:var(--text-primary);}
@@ -568,7 +569,7 @@ body{background:#0d0d0d;display:flex;flex-direction:column;align-items:center;pa
   <div class="cps"><span class="cp" onclick="openSheet('loc-rio')" role="button"><i class="fas fa-location-dot"></i>Nice, France</span><span class="cp" onclick="openSheet('work-photo')" role="button"><i class="fas fa-briefcase"></i>Photographer</span><span class="cp" onclick="openSheet('zodiac-scorpio')" role="button"><i class="fas fa-moon"></i>Scorpio</span></div>
   <div class="sts"><div class="si"><span class="sn">418</span><span class="slb">friends</span></div><span class="ssep">·</span><div class="si"><span class="sn">10.7K</span><span class="slb">followers</span></div><span class="ssep">·</span><div class="si"><span class="sn">3</span><span class="slb">mutual</span></div></div>
   <div class="mf-inline"><div class="mf-badges"><span class="mf-dot mf-dot-a">C</span><span class="mf-dot mf-dot-b">C</span><span class="mf-dot mf-dot-c">+1</span></div><div class="mf-inline-text">Claire, Camille and 1 other are friends with Louis</div></div>
-  <div class="act"><button class="a1 a1-follow"><i class="fas fa-user-plus"></i>Follow</button><button class="a2"><i class="far fa-comment"></i></button><button class="a2"><i class="fas fa-ellipsis"></i></button></div>
+  <div class="act"><button class="a1 a1-follow"><i class="fas fa-user-plus"></i>Follow</button><button type="button" class="a2" aria-label="Message"><img class="a2-ico" src="biggest%20view%20actions/send.svg" width="14" height="14" alt=""></button><button class="a2"><i class="fas fa-ellipsis"></i></button></div>
   <div id="nf-pub">
     <div class="dv"></div>
     <div class="sh"><span class="sh-t">Today's BeReal</span></div>

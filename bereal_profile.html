@@ -256,20 +256,20 @@ body{background:#0d0d0d;display:flex;flex-direction:column;align-items:center;pa
 .gi-act{background:none;border:none;padding:0;cursor:pointer;color:rgba(255,255,255,.9);font-size:22px;line-height:1;display:flex;}
 /* Tab bar */
 .home-indicator{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:134px;height:5px;border-radius:3px;background:#fff;z-index:210;pointer-events:none;}
-.tbar{position:absolute;bottom:24px;left:10px;right:10px;display:flex;align-items:center;padding:0 4px;height:70px;background:rgba(29,29,30,.82);backdrop-filter:blur(28px) saturate(1.5);-webkit-backdrop-filter:blur(28px) saturate(1.5);border:.5px solid rgba(255,255,255,.1);border-radius:100px;z-index:50;}
-.tab{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer;min-width:0;border-radius:100px;padding:6px 4px;}
-.tab.on{background:rgba(55,55,55,.9);padding:0 4px;align-self:stretch;margin:4px 0 4px 0;}
-.tab i{font-size:20px;color:rgba(255,255,255,.3);}
+.tbar{position:absolute;bottom:24px;left:10px;right:10px;display:flex;align-items:center;padding:0 3px;height:55px;background:rgba(29,29,30,.82);backdrop-filter:blur(28px) saturate(1.5);-webkit-backdrop-filter:blur(28px) saturate(1.5);border:.5px solid rgba(255,255,255,.1);border-radius:100px;z-index:50;}
+.tab{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer;min-width:0;border-radius:100px;padding:4px 2px;}
+.tab.on{background:rgba(55,55,55,.9);padding:0 3px;align-self:stretch;margin:3px 0 3px 0;}
+.tab i{font-size:17px;color:rgba(255,255,255,.3);}
 .tab.on i{color:#fff;}
 .tab svg.ti{color:rgba(255,255,255,.3);}
 .tab.on svg.ti{color:#fff;}
-.tl{font-size:var(--caption-s-size);line-height:var(--caption-s-line);letter-spacing:var(--caption-s-track);font-weight:500;color:rgba(255,255,255,.3);}
+.tl{font-size:10px;line-height:12px;letter-spacing:var(--caption-s-track);font-weight:500;color:rgba(255,255,255,.3);}
 .tab.on .tl{color:#fff;}
 .camb{flex:1;border-radius:0;background:transparent;display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;}
-.camb::before{content:'';position:absolute;width:48px;height:48px;border-radius:50%;background:#fff;z-index:0;}
-.camb i{position:relative;z-index:1;font-size:19px;color:#000;}
-.camb i{font-size:19px;color:#000;}
-.tb-av{width:28px;height:28px;border-radius:50%;overflow:hidden;}
+.camb::before{content:'';position:absolute;width:38px;height:38px;border-radius:50%;background:#fff;z-index:0;}
+.camb i{position:relative;z-index:1;font-size:16px;color:#000;}
+.camb i{font-size:16px;color:#000;}
+.tb-av{width:24px;height:24px;border-radius:50%;overflow:hidden;}
 .tb-av img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;}
 #s-friend.on~.tbar,#s-nonfriend.on~.tbar,#s-official.on~.tbar{display:none!important;}
 /* Tab bar - Figma variant */
@@ -278,7 +278,7 @@ body{background:#0d0d0d;display:flex;flex-direction:column;align-items:center;pa
 .tbar.tb-figma .tl{color:#fff;}
 .tbar.tb-figma .tab.on{background:rgba(255,255,255,0.2);}
 .tbar.tb-figma .tab.on i,.tbar.tb-figma .tab.on svg.ti,.tbar.tb-figma .tab.on .tl{color:#fff;}
-.tbar.tb-figma .camb::before{width:44px;height:44px;}
+.tbar.tb-figma .camb::before{width:36px;height:36px;}
 /* Tab bar toggle button */
 .tb-toggle-btn{background:rgba(255,255,255,.08);border:none;border-radius:100px;padding:8px 14px;font-family:var(--font-text);font-size:var(--body-xs-size);line-height:var(--body-xs-line);letter-spacing:var(--body-xs-track);font-weight:500;color:rgba(255,255,255,.45);cursor:pointer;transition:all 180ms;white-space:nowrap;margin-left:8px;}
 .tb-toggle-btn:hover{color:rgba(255,255,255,.75);}
@@ -389,10 +389,12 @@ body{background:#0d0d0d;display:flex;flex-direction:column;align-items:center;pa
 .ctx-menu{position:fixed;z-index:261;min-width:220px;max-width:min(280px,calc(100vw - 32px));background:#2C2C2E;border-radius:14px;overflow:hidden;border:.5px solid rgba(255,255,255,.12);box-shadow:0 16px 48px rgba(0,0,0,.55);opacity:0;visibility:hidden;transform:scale(.97) translateY(-6px);transform-origin:top right;transition:opacity 180ms ease,transform 180ms ease,visibility 180ms;}
 .ctx-menu.on{opacity:1;visibility:visible;transform:scale(1) translateY(0);}
 .ctx-menu-body{display:flex;flex-direction:column;}
-.ctx-menu-body button{display:flex;width:100%;align-items:center;gap:10px;padding:14px 16px;border:none;border-top:.5px solid rgba(255,255,255,.08);background:transparent;color:#fff;font-family:var(--font-text);font-size:var(--body-s-size);line-height:var(--body-s-line);letter-spacing:var(--body-s-track);text-align:left;cursor:pointer;transition:background 150ms;}
+.ctx-menu-body button{display:flex;width:100%;align-items:center;gap:12px;padding:12px 14px;border:none;border-top:.5px solid rgba(255,255,255,.08);background:transparent;color:#fff;font-family:var(--font-text);font-size:var(--body-s-size);line-height:var(--body-s-line);letter-spacing:var(--body-s-track);text-align:left;cursor:pointer;transition:background 150ms;}
 .ctx-menu-body button:first-child{border-top:none;}
 .ctx-menu-body button:active{background:rgba(255,255,255,.1);}
-.ctx-menu-body button.danger{color:#FF453A;}
+.ctx-menu-body button.danger,.ctx-menu-body button.danger .ctx-mi{color:#FF453A;}
+.ctx-menu-body .ctx-mi{width:22px;flex-shrink:0;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.42);font-size:15px;}
+.ctx-menu-body .ctx-mt{flex:1;min-width:0;}
 /* Viewer cover */
 .hl-view-cover{position:relative;width:100%;height:400px;min-height:400px;flex-shrink:0;flex-grow:0;overflow:hidden;background:#111;}
 .hl-view-cover.img-ph{background:#1C1C1E;}
@@ -1384,9 +1386,9 @@ function openCtxMenu(anchorEl,kind){
   var p=document.getElementById('ctx-menu-panel');
   if(!bodyEl||!bd||!p)return;
   if(kind==='hl'){
-    bodyEl.innerHTML='<button type="button" role="menuitem" onclick="ctxHlShare()">Share highlight</button><button type="button" role="menuitem" onclick="ctxHlEdit()">Edit highlight</button><button type="button" role="menuitem" class="danger" onclick="ctxHlDelete()">Delete highlight</button>';
+    bodyEl.innerHTML='<button type="button" role="menuitem" onclick="ctxHlShare()"><span class="ctx-mi" aria-hidden="true"><i class="fas fa-arrow-up-from-bracket"></i></span><span class="ctx-mt">Share highlight</span></button><button type="button" role="menuitem" onclick="ctxHlEdit()"><span class="ctx-mi" aria-hidden="true"><i class="fas fa-pen"></i></span><span class="ctx-mt">Edit highlight</span></button><button type="button" role="menuitem" class="danger" onclick="ctxHlDelete()"><span class="ctx-mi" aria-hidden="true"><i class="fas fa-trash"></i></span><span class="ctx-mt">Delete highlight</span></button>';
   }else{
-    bodyEl.innerHTML='<button type="button" role="menuitem" onclick="ctxBrShare()">Share BeReal</button><button type="button" role="menuitem" onclick="ctxBrCopyLink()">Copy link</button><button type="button" role="menuitem" onclick="ctxBrReport()">Report…</button>';
+    bodyEl.innerHTML='<button type="button" role="menuitem" onclick="ctxBrShare()"><span class="ctx-mi" aria-hidden="true"><i class="fas fa-arrow-up-from-bracket"></i></span><span class="ctx-mt">Share BeReal</span></button><button type="button" role="menuitem" onclick="ctxBrCopyLink()"><span class="ctx-mi" aria-hidden="true"><i class="fas fa-link"></i></span><span class="ctx-mt">Copy link</span></button><button type="button" role="menuitem" onclick="ctxBrReport()"><span class="ctx-mi" aria-hidden="true"><i class="fas fa-flag"></i></span><span class="ctx-mt">Report…</span></button>';
   }
   p.dataset.kind=kind;
   bd.classList.add('on');

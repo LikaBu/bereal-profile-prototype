@@ -246,7 +246,7 @@ body{background:#0d0d0d;display:flex;flex-direction:column;align-items:center;pa
 .grd.g2 .gir svg{width:14px;height:14px;}
 .gir-comm{display:none;align-items:center;gap:3px;margin-left:6px;}
 .grd.g2 .gir-comm{display:flex;}
-.gir-comm i{font-size:12px;}
+.gir-comm>img{width:12px;height:12px;object-fit:contain;display:block;flex-shrink:0;}
 .gi-avr{display:none;position:absolute;bottom:10px;left:10px;align-items:center;z-index:3;}
 .grd.g1 .gi-avr{display:flex;}
 .gi-av{width:36px;height:36px;border-radius:50%;overflow:hidden;border:2px solid rgba(0,0,0,.75);background:#333;flex-shrink:0;}
@@ -343,6 +343,7 @@ body{background:#0d0d0d;display:flex;flex-direction:column;align-items:center;pa
 .brd-ustatus{font-size:var(--caption-s-size);color:rgba(255,255,255,.45);letter-spacing:var(--caption-s-track);line-height:var(--caption-s-line);}
 .brd-actions{display:flex;gap:8px;margin-left:auto;}
 .brd-btn{width:38px;height:38px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.08);border-radius:50%;border:none;color:#fff;cursor:pointer;flex-shrink:0;font-size:14px;}
+.brd-btn>img{width:14px;height:14px;object-fit:contain;display:block;pointer-events:none;}
 .brd-media{position:relative;width:100%;aspect-ratio:3/4;background:#111;}
 .brd-main-wrap{position:absolute;inset:0;z-index:1;}
 .brd-main{width:100%;height:100%;object-fit:cover;display:block;}
@@ -675,7 +676,7 @@ body{background:#0d0d0d;display:flex;flex-direction:column;align-items:center;pa
   <div class="brd-topbar">
     <button class="brd-back" onclick="closeBeRealDetail()"><i class="fas fa-arrow-left"></i></button>
     <div class="brd-user"><span class="brd-uname" id="brd-uname">username</span><span class="brd-ustatus" id="brd-ustatus">On time</span><span class="brd-udate" id="brd-udate"></span></div>
-    <div class="brd-actions"><button type="button" class="brd-btn" aria-label="Send"><i class="fas fa-paper-plane"></i></button><button type="button" class="brd-btn" aria-label="More" onclick="toggleCtxMenu(event,'brd')"><i class="fas fa-ellipsis"></i></button></div>
+    <div class="brd-actions"><button type="button" class="brd-btn" aria-label="Send"><img src="biggest%20view%20actions/send.svg" width="14" height="14" alt=""></button><button type="button" class="brd-btn" aria-label="More" onclick="toggleCtxMenu(event,'brd')"><i class="fas fa-ellipsis"></i></button></div>
   </div>
   <div class="brd-media"><div class="brd-main-wrap img-ph"><img class="brd-main" id="brd-main-img" src="" alt=""></div><div class="brd-sf" id="brd-sf"><div class="brd-sf-ph img-ph"><img id="brd-sf-img" src="" alt=""></div></div></div>
   <div class="brd-body">
@@ -1249,7 +1250,7 @@ function enrichGridItems(){
     if(gir){
       var comm=document.createElement('span');
       comm.className='gir-comm';
-      comm.innerHTML='<i class="fas fa-comment"></i>'+cmNum;
+      comm.innerHTML='<img src="biggest%20view%20actions/Comment.svg" width="12" height="12" alt="">'+cmNum;
       gir.appendChild(comm);
     }
     // Append avatar group (shown only in g1 via CSS)

@@ -75,6 +75,10 @@ body{background:#0d0d0d;display:flex;flex-direction:column;align-items:center;pa
 .screen.on .scr-scroll{animation:screenIn 420ms cubic-bezier(0.23,1,0.32,1) both;will-change:opacity,transform;}
 @keyframes screenIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
 .screen.on .cnt{animation:sheetItemIn 400ms cubic-bezier(0.23,1,0.32,1) both;animation-delay:50ms;}
+.ph.instant-profile-switch .screen{transition:none!important;}
+.ph.instant-profile-switch .screen.on .scr-scroll{animation:none!important;will-change:auto;}
+.ph.instant-profile-switch .screen.on .cnt{animation:none!important;}
+.ph.instant-profile-switch .br-detail{transition:none!important;}
 .scr-scroll{min-height:100%;}
 .car{position:relative;height:480px;overflow:hidden;background:#111;}
 .car:before{content:'';position:absolute;left:0;right:0;top:0;height:calc(88px + var(--notch-pad));background:linear-gradient(to bottom,rgba(0,0,0,.28) 0%,rgba(0,0,0,.14) 40%,rgba(0,0,0,0) 100%);pointer-events:none;z-index:35;}
@@ -746,12 +750,19 @@ function shuffleProfileImages(){
   }
 }
 function showScreen(id){
+  var screenId=id==='nonfriend-private'?'nonfriend':id;
+  var hadOn=document.querySelector('.screen.on');
+  var wasSwitch=!!(hadOn&&hadOn.id!=='s-'+screenId);
+  var ph=document.querySelector('.ph');
+  if(wasSwitch&&ph)ph.classList.add('instant-profile-switch');
   var brd=document.getElementById('br-detail');
   if(brd&&brd.classList.contains('open'))closeBeRealDetail();
-  var screenId=id==='nonfriend-private'?'nonfriend':id;
   document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('on');});
   var activeScreen=document.querySelector('#s-'+screenId);
-  if(!activeScreen)return;
+  if(!activeScreen){
+    if(ph)ph.classList.remove('instant-profile-switch');
+    return;
+  }
   activeScreen.classList.add('on');
   activeScreen.scrollTop=0;
   document.querySelectorAll('.sw').forEach(function(b){b.classList.remove('on');});
@@ -760,6 +771,11 @@ function showScreen(id){
   if(screenId==='nonfriend')setNonfriendPrivacy(id==='nonfriend-private');
   clearAllStoryTimers();
   startStoryAutoplay(screenId);
+  if(wasSwitch&&ph){
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){ph.classList.remove('instant-profile-switch');});
+    });
+  }
 }
 var CAR={mine:{cur:0,n:5,selfies:MY_SELFIES},friend:{cur:0,n:3,selfies:FR_SELFIES},nonfriend:{cur:0,n:0,selfies:{}},official:{cur:0,n:0,selfies:{}}};
 var SWAP_STATE={mine:{},friend:{},nonfriend:{},official:{}};

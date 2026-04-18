@@ -394,6 +394,8 @@ body{background:#0d0d0d;display:flex;flex-direction:column;align-items:center;pa
 .ctx-menu-body button:active{background:rgba(255,255,255,.1);}
 .ctx-menu-body button.danger,.ctx-menu-body button.danger .ctx-mi{color:#FF453A;}
 .ctx-menu-body .ctx-mi{width:22px;flex-shrink:0;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.42);font-size:15px;}
+.ctx-menu-body .ctx-mi .ctx-svg{width:17px;height:17px;display:block;flex-shrink:0;opacity:.92;}
+.ctx-menu-body button.danger .ctx-mi .ctx-svg{opacity:1;}
 .ctx-menu-body .ctx-mt{flex:1;min-width:0;}
 /* Viewer cover */
 .hl-view-cover{position:relative;width:100%;height:400px;min-height:400px;flex-shrink:0;flex-grow:0;overflow:hidden;background:#111;}
@@ -605,7 +607,7 @@ body{background:#0d0d0d;display:flex;flex-direction:column;align-items:center;pa
   <div style="height:100px"></div>
 </div></div></div>
   <div class="home-indicator"></div>
-  <div class="tbar tb-figma"><div class="tab"><i class="fas fa-house"></i><span class="tl">Home</span></div><div class="tab"><i class="fas fa-user-group"></i><span class="tl">Friends</span></div><div class="camb"><i class="fas fa-camera"></i></div><div class="tab"><i class="fas fa-calendar-days"></i><span class="tl">Memories</span></div><div class="tab on"><div class="tb-av"><img src="selfies_assets/CleanShot%202026-04-15%20at%2013.26.14%402x.png"></div><span class="tl">Profile</span></div></div><div class="bsh-bd" id="bsh-bd" onclick="closeSheet()"></div>
+  <div class="tbar tb-figma"><div class="tab"><i class="fas fa-house"></i><span class="tl">Home</span></div><div class="tab"><i class="fas fa-user-group"></i><span class="tl">Friends</span></div><div class="camb"><i class="fas fa-camera"></i></div><div class="tab"><i class="fas fa-paper-plane"></i><span class="tl">Chat</span></div><div class="tab on"><div class="tb-av"><img src="selfies_assets/CleanShot%202026-04-15%20at%2013.26.14%402x.png"></div><span class="tl">Profile</span></div></div><div class="bsh-bd" id="bsh-bd" onclick="closeSheet()"></div>
 <div class="bsheet" id="bsheet">
   <div class="bsh-handle"></div>
   <button type="button" class="bsh-close" onclick="closeSheet()" aria-label="Close"><svg class="bsh-close-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M7 7l10 10M17 7L7 17" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
@@ -1380,15 +1382,24 @@ function positionCtxMenu(anchorEl){
   p.style.left=left+'px';
   p.style.top=top+'px';
 }
+function ctxMenuSvgTrash(){
+  return'<svg class="ctx-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>';
+}
+function ctxMenuSvgLink(){
+  return'<svg class="ctx-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg>';
+}
+function ctxMenuSvgFlag(){
+  return'<svg class="ctx-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6h-5.6z"/></svg>';
+}
 function openCtxMenu(anchorEl,kind){
   var bodyEl=document.getElementById('ctx-menu-body');
   var bd=document.getElementById('ctx-menu-bd');
   var p=document.getElementById('ctx-menu-panel');
   if(!bodyEl||!bd||!p)return;
   if(kind==='hl'){
-    bodyEl.innerHTML='<button type="button" role="menuitem" onclick="ctxHlShare()"><span class="ctx-mi" aria-hidden="true"><i class="fas fa-arrow-up-from-bracket"></i></span><span class="ctx-mt">Share highlight</span></button><button type="button" role="menuitem" onclick="ctxHlEdit()"><span class="ctx-mi" aria-hidden="true"><i class="fas fa-pen"></i></span><span class="ctx-mt">Edit highlight</span></button><button type="button" role="menuitem" class="danger" onclick="ctxHlDelete()"><span class="ctx-mi" aria-hidden="true"><i class="fas fa-trash"></i></span><span class="ctx-mt">Delete highlight</span></button>';
+    bodyEl.innerHTML='<button type="button" role="menuitem" onclick="ctxHlShare()"><span class="ctx-mi" aria-hidden="true"><i class="fas fa-arrow-up-from-bracket"></i></span><span class="ctx-mt">Share highlight</span></button><button type="button" role="menuitem" onclick="ctxHlEdit()"><span class="ctx-mi" aria-hidden="true"><i class="fas fa-pen"></i></span><span class="ctx-mt">Edit highlight</span></button><button type="button" role="menuitem" class="danger" onclick="ctxHlDelete()"><span class="ctx-mi" aria-hidden="true">'+ctxMenuSvgTrash()+'</span><span class="ctx-mt">Delete highlight</span></button>';
   }else{
-    bodyEl.innerHTML='<button type="button" role="menuitem" onclick="ctxBrShare()"><span class="ctx-mi" aria-hidden="true"><i class="fas fa-arrow-up-from-bracket"></i></span><span class="ctx-mt">Share BeReal</span></button><button type="button" role="menuitem" onclick="ctxBrCopyLink()"><span class="ctx-mi" aria-hidden="true"><i class="fas fa-link"></i></span><span class="ctx-mt">Copy link</span></button><button type="button" role="menuitem" onclick="ctxBrReport()"><span class="ctx-mi" aria-hidden="true"><i class="fas fa-flag"></i></span><span class="ctx-mt">Report…</span></button>';
+    bodyEl.innerHTML='<button type="button" role="menuitem" onclick="ctxBrShare()"><span class="ctx-mi" aria-hidden="true"><i class="fas fa-arrow-up-from-bracket"></i></span><span class="ctx-mt">Share BeReal</span></button><button type="button" role="menuitem" onclick="ctxBrCopyLink()"><span class="ctx-mi" aria-hidden="true">'+ctxMenuSvgLink()+'</span><span class="ctx-mt">Copy link</span></button><button type="button" role="menuitem" onclick="ctxBrReport()"><span class="ctx-mi" aria-hidden="true">'+ctxMenuSvgFlag()+'</span><span class="ctx-mt">Report…</span></button>';
   }
   p.dataset.kind=kind;
   bd.classList.add('on');

@@ -467,9 +467,20 @@ body{background:#0d0d0d;display:flex;flex-direction:column;align-items:center;pa
 .hl-view-grid.g2{grid-template-columns:repeat(2,1fr);}
 .hl-view-grid.g1{grid-template-columns:1fr;}
 .hl-view-grid.g1 .hl-vgi-sf{width:33%;border-radius:14px;top:10px;left:10px;}
+/* Highlight viewer tiles — same overlays as Public BeReals (.grd) */
+.hl-view-grid.g3 .hl-vgi::after,.hl-view-grid.g2 .hl-vgi::after,.hl-view-grid.g1 .hl-vgi::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.58) 0%,transparent 42%);pointer-events:none;z-index:1;}
+.hl-view-grid.g3 .gir,.hl-view-grid.g2 .gir{background:none;border-radius:0;}
+.hl-view-grid.g1 .gir{display:none;}
+.hl-view-grid.g3 .gir{font-size:var(--caption-m-size);line-height:var(--caption-m-line);letter-spacing:var(--caption-m-track);bottom:4px;left:4px;padding:2px 4px;gap:3px;}
+.hl-view-grid.g3 .gir svg{width:13px;height:13px;}
+.hl-view-grid.g2 .gir{font-size:var(--body-xs-size);line-height:var(--body-xs-line);letter-spacing:var(--body-xs-track);bottom:5px;left:5px;padding:3px 6px;gap:4px;}
+.hl-view-grid.g2 .gir svg{width:14px;height:14px;}
+.hl-view-grid.g2 .gir-comm{display:flex;}
+.hl-view-grid.g1 .gi-avr{display:flex;}
+.hl-view-grid.g1 .gi-acts{display:flex;}
 .hl-vgi{aspect-ratio:3/4;position:relative;overflow:hidden;background:#1a1a1a;cursor:pointer;}
 .hl-vgi-main{position:absolute;inset:0;z-index:1;}
 .hl-vgi-main>img{width:100%;height:100%;object-fit:cover;object-position:center 25%;display:block;}
-.hl-vgi-sf{position:absolute;top:7px;left:7px;width:26%;aspect-ratio:3/4;border-radius:8px;border:2px solid #000;overflow:hidden;background:#333;z-index:2;}
+.hl-vgi-sf{position:absolute;top:7px;left:7px;width:26%;aspect-ratio:3/4;border-radius:8px;border:2px solid #000;overflow:hidden;background:#333;z-index:2;cursor:pointer;}
 .hl-vgi-sf-in{position:absolute;inset:0;width:100%;height:100%;}
 .hl-vgi-sf-in>img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;}

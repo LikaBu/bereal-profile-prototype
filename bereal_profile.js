@@ -884,6 +884,9 @@ initBrDetailSelfieTap();
 // ── Highlight sheet ──
 var ALL_PICS_HL=['pictures_assets/IMG_2815.jpeg','pictures_assets/IMG_3582.JPG','pictures_assets/IMG_3606.JPG','pictures_assets/IMG_6689.jpeg','pictures_assets/IMG_6714.jpeg','pictures_assets/IMG_6745.jpeg','pictures_assets/IMG_6751.jpeg','pictures_assets/IMG_0082.jpeg','pictures_assets/IMG_0313.jpeg','pictures_assets/IMG_0766.jpeg','pictures_assets/IMG_1080.jpeg','pictures_assets/IMG_1228.jpeg','pictures_assets/IMG_1666.jpeg','pictures_assets/IMG_2193.jpeg','pictures_assets/IMG_2726.jpeg'];
 var ALL_SF_HL=['selfies_assets/CleanShot%202026-04-15%20at%2013.25.39%402x.png','selfies_assets/CleanShot%202026-04-15%20at%2013.26.14%402x.png','selfies_assets/CleanShot%202026-04-15%20at%2013.26.46%402x.png','selfies_assets/CleanShot%202026-04-15%20at%2013.27.18%402x.png','selfies_assets/CleanShot%202026-04-15%20at%2013.27.34%402x.png','selfies_assets/CleanShot%202026-04-15%20at%2013.27.57%402x.png','selfies_assets/CleanShot%202026-04-15%20at%2013.28.07%402x.png','selfies_assets/CleanShot%202026-04-15%20at%2013.31.08%402x.png'];
+var HL_GIR_SVG='<svg width="11" height="11" viewBox="0 0 11 11" fill="none" aria-hidden="true"><circle cx="5.5" cy="5.5" r="5" stroke="rgba(255,255,255,0.9)" stroke-width="1"/><circle cx="3.8" cy="4.8" r=".65" fill="rgba(255,255,255,0.9)"/><circle cx="7.2" cy="4.8" r=".65" fill="rgba(255,255,255,0.9)"/><path d="M3.2 7c.6.8 4 .8 4.6 0" stroke="rgba(255,255,255,0.9)" stroke-width=".9" stroke-linecap="round"/></svg>';
+var HL_GI_AVR_INNER='<div class="gi-av"><img src="selfies_assets/CleanShot%202026-04-15%20at%2013.25.39%402x.png" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;"></div><div class="gi-av"><img src="selfies_assets/CleanShot%202026-04-15%20at%2013.27.34%402x.png" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;"></div><span class="gi-avlbl">__RX__ reactions</span>';
+var HL_GI_ACTS_INNER='<button type="button" class="gi-act" aria-label="Send" onclick="event.stopPropagation()"><img src="biggest%20view%20actions/send.svg" alt=""></button><button type="button" class="gi-act" aria-label="Comment" onclick="event.stopPropagation()"><img src="biggest%20view%20actions/Comment.svg" alt=""></button><button type="button" class="gi-act" aria-label="React" onclick="event.stopPropagation()"><img src="biggest%20view%20actions/Smile.svg" alt=""></button>';
 function buildHlPosts(n,start){
   var posts=[];
   for(var i=0;i<n;i++){
@@ -1023,7 +1026,9 @@ function openHlSheet(mode,name,ctx){
       var vhtml='';var cctx=ctx||'mine';
       for(var j=0;j<h.posts.length;j++){
         var pair=h.posts[j];var vp=pair.main;var vsf=pair.sf;
-        vhtml+='<div class="hl-vgi" onclick="openBeRealDetail(\''+escJsStr(vp)+'\',\''+escJsStr(vsf)+'\',\''+cctx+'\')"><div class="img-ph hl-vgi-main"><img src="'+vp+'" alt=""></div><div class="hl-vgi-sf"><div class="img-ph hl-vgi-sf-in"><img src="'+vsf+'" alt=""></div></div></div>';
+        var rxNum=2+(j*7)%29;
+        var cmNum=Math.max(1,Math.floor(rxNum*0.5));
+        vhtml+='<div class="hl-vgi" onclick="openBeRealDetail(\''+escJsStr(vp)+'\',\''+escJsStr(vsf)+'\',\''+cctx+'\')"><div class="img-ph hl-vgi-main"><img src="'+vp+'" alt=""></div><div class="hl-vgi-sf" onclick="event.stopPropagation()"><div class="img-ph hl-vgi-sf-in"><img src="'+vsf+'" alt=""></div></div><div class="gir">'+HL_GIR_SVG+rxNum+'<span class="gir-comm"><img src="biggest%20view%20actions/Comment.svg" width="15" height="15" alt="">'+cmNum+'</span></div><div class="gi-avr">'+HL_GI_AVR_INNER.replace('__RX__',String(rxNum))+'</div><div class="gi-acts">'+HL_GI_ACTS_INNER+'</div></div>';
       }
       vg.innerHTML=vhtml;
       wireAllImgPh(vg);

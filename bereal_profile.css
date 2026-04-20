@@ -72,9 +72,9 @@ input[type="text"],input[type="search"],textarea{cursor:text;}
 .screen{position:absolute;inset:0;bottom:0;overflow-y:auto;scrollbar-width:none;opacity:0;pointer-events:none;z-index:1;transition:opacity 460ms cubic-bezier(0.2,0,0,1);}
 .screen::-webkit-scrollbar{display:none;}
 .screen.on{opacity:1;pointer-events:auto;z-index:2;}
-.screen.on .scr-scroll{animation:screenIn 420ms cubic-bezier(0.23,1,0.32,1) both;will-change:opacity,transform;}
+.screen.on .scr-scroll{animation:screenIn 560ms cubic-bezier(0.23,1,0.32,1) both;will-change:opacity,transform;}
 @keyframes screenIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
-.screen.on .cnt{animation:sheetItemIn 400ms cubic-bezier(0.23,1,0.32,1) both;animation-delay:50ms;}
+.screen.on .cnt{animation:sheetItemIn 520ms cubic-bezier(0.23,1,0.32,1) both;animation-delay:65ms;}
 .ph.instant-profile-switch .screen{transition:none!important;}
 .ph.instant-profile-switch .screen.on .scr-scroll{animation:none!important;will-change:auto;}
 .ph.instant-profile-switch .screen.on .cnt{animation:none!important;}

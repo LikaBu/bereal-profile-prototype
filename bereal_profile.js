@@ -378,10 +378,21 @@ function wireAllImgPh(root){
   if(!root||!root.querySelectorAll)return;
   root.querySelectorAll('.img-ph img').forEach(wireImgPh);
 }
+function sheetListUsesMessageAction(){
+  var on=document.querySelector('.screen.on');
+  if(!on)return false;
+  return on.id==='s-friend'||on.id==='s-nonfriend';
+}
 function renderSheetUsers(users){
   var root=document.getElementById('bsh-users');
   if(!users.length){root.innerHTML='<div class="bsh-empty">No results</div>';return;}
-  root.innerHTML=users.map(function(u){return '<div class="bsh-user"><div class="bsh-uav img-ph"><img src="'+SELFIE_PATHS[(u.a||0)%SELFIE_PATHS.length]+'" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;"></div><div class="bsh-uinfo"><div class="bsh-uname">'+u.n+'</div><div class="bsh-usub">'+u.s+'</div><div class="bsh-meta-ln">'+(u.m||'')+'</div></div><button class="bsh-ufol">Follow</button></div>';}).join('');
+  var msgBtn=sheetListUsesMessageAction();
+  root.innerHTML=users.map(function(u){
+    var act=msgBtn
+      ?'<button type="button" class="bsh-ufol bsh-ufol--icon" aria-label="Message"><img class="bsh-umsg-ico" src="biggest%20view%20actions/send.svg" alt=""></button>'
+      :'<button type="button" class="bsh-ufol">Follow</button>';
+    return '<div class="bsh-user"><div class="bsh-uav img-ph"><img src="'+SELFIE_PATHS[(u.a||0)%SELFIE_PATHS.length]+'" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;"></div><div class="bsh-uinfo"><div class="bsh-uname">'+u.n+'</div><div class="bsh-usub">'+u.s+'</div><div class="bsh-meta-ln">'+(u.m||'')+'</div></div>'+act+'</div>';
+  }).join('');
   wireAllImgPh(root);
 }
 var SHEET={

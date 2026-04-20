@@ -351,16 +351,9 @@ function setNonfriendPrivacy(privateMode){
   document.getElementById('nf-prv').style.display=isPrivate?'block':'none';
   document.getElementById('nf-spacer').style.display=isPrivate?'none':'';
   document.getElementById('s-nonfriend').style.overflow=isPrivate?'hidden':'';
-  var mf=document.getElementById('nf-mf-row');
-  if(mf){
-    mf.classList.toggle('mf-inline--private',isPrivate);
-    mf.setAttribute('tabindex',isPrivate?'0':'-1');
-    mf.setAttribute('aria-disabled',isPrivate?'false':'true');
-  }
 }
 function openMutualFriendsSheet(){
-  var mf=document.getElementById('nf-mf-row');
-  if(!mf||!mf.classList.contains('mf-inline--private'))return;
+  if(!document.getElementById('nf-mf-row'))return;
   openSheet('mutual-nf');
 }
 function resetImgPh(img){
@@ -468,7 +461,7 @@ var SHEET={
       {n:'Thomas Garnier',s:'1 mutual friend',m:'Port district · musician',a:1},
       {n:'Manon Dupuis',s:'3 mutual friends',m:'Promenade area · architect',a:2}
     ]},
-  'mutual-nf':{icon:'fa-users',title:'Mutual friends',q:'Mutual friends',
+  'mutual-nf':{icon:'fa-user-friends',title:'Mutual friends',q:'Mutual friends',
     meta:[['3','people you both know'],['Nice, France','shared city'],['You & Louis','not friends yet']],
     users:[
       {n:'Claire Dupont',s:'Your friend',m:'Old Town · designer',a:0},
@@ -538,7 +531,8 @@ function openSheet(id){
   }
   var users=d.users;
   var metaEl=document.getElementById('bsh-meta-el');
-  document.getElementById('bsh-title').innerHTML='<i class=\"fas '+d.icon+'\"></i>'+d.title;
+  var iconHtml=d.icon?'<i class="fas '+d.icon+'" aria-hidden="true"></i>':'';
+  document.getElementById('bsh-title').innerHTML=iconHtml+'<span class="bsh-ttl-lbl">'+d.title+'</span>';
   document.getElementById('bsh-bd').classList.add('open');
   sheet.classList.add('open');
   if(metaEl)metaEl.innerHTML=metaHtml;

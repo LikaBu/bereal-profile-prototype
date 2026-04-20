@@ -461,7 +461,7 @@ var SHEET={
       {n:'Thomas Garnier',s:'1 mutual friend',m:'Port district · musician',a:1},
       {n:'Manon Dupuis',s:'3 mutual friends',m:'Promenade area · architect',a:2}
     ]},
-  'mutual-nf':{icon:'fa-user-friends',title:'Mutual friends',q:'Mutual friends',
+  'mutual-nf':{icon:'fa-user-plus',title:'Mutual friends',q:'Mutual friends',
     meta:[['3','people you both know'],['Nice, France','shared city'],['You & Louis','not friends yet']],
     users:[
       {n:'Claire Dupont',s:'Your friend',m:'Old Town · designer',a:0},
@@ -531,10 +531,11 @@ function openSheet(id){
   }
   var users=d.users;
   var metaEl=document.getElementById('bsh-meta-el');
-  var iconHtml=d.icon?'<i class="fas '+d.icon+'" aria-hidden="true"></i>':'';
+  var iconHtml=d.icon?'<i class="fas '+d.icon+' bsh-ttl-ico" aria-hidden="true"></i>':'';
   document.getElementById('bsh-title').innerHTML=iconHtml+'<span class="bsh-ttl-lbl">'+d.title+'</span>';
   document.getElementById('bsh-bd').classList.add('open');
   sheet.classList.add('open');
+  sheet.classList.toggle('bsheet--no-explore',id==='mutual-nf');
   if(metaEl)metaEl.innerHTML=metaHtml;
   if(id==='link-site'){
     document.getElementById('bsh-users').innerHTML='';
@@ -542,9 +543,21 @@ function openSheet(id){
     renderSheetUsers(users);
   }
   var exploreBtn=document.getElementById('bsh-explore');
-  if(exploreBtn)exploreBtn.textContent=id==='link-site'?'Open in browser':'Explore all';
+  if(exploreBtn){
+    if(id==='mutual-nf'){
+      exploreBtn.style.display='none';
+      exploreBtn.textContent='';
+    }else{
+      exploreBtn.style.display='';
+      exploreBtn.textContent=id==='link-site'?'Open in browser':'Explore all';
+    }
+  }
 }
-function closeSheet(){document.getElementById('bsh-bd').classList.remove('open');document.getElementById('bsheet').classList.remove('open');}
+function closeSheet(){
+  document.getElementById('bsh-bd').classList.remove('open');
+  var sh=document.getElementById('bsheet');
+  if(sh){sh.classList.remove('open');sh.classList.remove('bsheet--no-explore');}
+}
 function setupPinch(id){
   var g=document.getElementById('grd-'+id);
   if(!g||g.dataset.pinchBound==='1')return;

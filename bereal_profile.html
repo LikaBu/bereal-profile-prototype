@@ -197,13 +197,20 @@
     </div>
     <div id="hl-viewer" style="display:none">
       <div class="hl-viewer-inner">
-      <div class="hl-view-cover img-ph">
-        <img id="hl-view-cover-img" src="" alt="">
-        <div class="hl-view-cover-overlay"></div>
-        <span class="hl-view-cnt" id="hl-view-cnt"></span>
+      <div class="hl-view-hero">
+        <div class="hl-view-cover-wrap">
+          <div class="hl-view-cover img-ph">
+            <img id="hl-view-cover-img" src="" alt="">
+            <div class="hl-view-cover-overlay"></div>
+            <h2 class="hl-view-caption" id="hl-view-caption"></h2>
+          </div>
+        </div>
+        <div class="hl-view-toolbar">
+          <span class="hl-view-meta" id="hl-view-cnt"></span>
+          <div class="seg-wrap"><button type="button" class="seg-btn on" id="hl-vsg3" onclick="setHlViewGrid(3,true)"><svg width="18" height="14" viewBox="0 0 18 14" fill="none" aria-hidden="true"><rect x="0" y="0" width="4.5" height="6" rx="1" fill="currentColor"/><rect x="6.75" y="0" width="4.5" height="6" rx="1" fill="currentColor"/><rect x="13.5" y="0" width="4.5" height="6" rx="1" fill="currentColor"/><rect x="0" y="8" width="4.5" height="6" rx="1" fill="currentColor"/><rect x="6.75" y="8" width="4.5" height="6" rx="1" fill="currentColor"/><rect x="13.5" y="8" width="4.5" height="6" rx="1" fill="currentColor"/></svg></button><button type="button" class="seg-btn" id="hl-vsg2" onclick="setHlViewGrid(2,true)"><svg width="18" height="14" viewBox="0 0 18 14" fill="none" aria-hidden="true"><rect x="0" y="0" width="7.5" height="6" rx="1" fill="currentColor"/><rect x="10.5" y="0" width="7.5" height="6" rx="1" fill="currentColor"/><rect x="0" y="8" width="7.5" height="6" rx="1" fill="currentColor"/><rect x="10.5" y="8" width="7.5" height="6" rx="1" fill="currentColor"/></svg></button><button type="button" class="seg-btn" id="hl-vsg1" onclick="setHlViewGrid(1,true)"><svg width="18" height="14" viewBox="0 0 18 14" fill="none" aria-hidden="true"><rect x="0" y="0" width="18" height="6" rx="1" fill="currentColor"/><rect x="0" y="8" width="18" height="6" rx="1" fill="currentColor"/></svg></button></div>
+        </div>
       </div>
-      <div class="sh hl-view-grd-head" id="hl-view-grd-head"><span class="sh-t">BeReals</span><div class="seg-wrap"><button type="button" class="seg-btn on" id="hl-vsg3" onclick="setHlViewGrid(3,true)"><svg width="18" height="14" viewBox="0 0 18 14" fill="none" aria-hidden="true"><rect x="0" y="0" width="4.5" height="6" rx="1" fill="currentColor"/><rect x="6.75" y="0" width="4.5" height="6" rx="1" fill="currentColor"/><rect x="13.5" y="0" width="4.5" height="6" rx="1" fill="currentColor"/><rect x="0" y="8" width="4.5" height="6" rx="1" fill="currentColor"/><rect x="6.75" y="8" width="4.5" height="6" rx="1" fill="currentColor"/><rect x="13.5" y="8" width="4.5" height="6" rx="1" fill="currentColor"/></svg></button><button type="button" class="seg-btn" id="hl-vsg2" onclick="setHlViewGrid(2,true)"><svg width="18" height="14" viewBox="0 0 18 14" fill="none" aria-hidden="true"><rect x="0" y="0" width="7.5" height="6" rx="1" fill="currentColor"/><rect x="10.5" y="0" width="7.5" height="6" rx="1" fill="currentColor"/><rect x="0" y="8" width="7.5" height="6" rx="1" fill="currentColor"/><rect x="10.5" y="8" width="7.5" height="6" rx="1" fill="currentColor"/></svg></button><button type="button" class="seg-btn" id="hl-vsg1" onclick="setHlViewGrid(1,true)"><svg width="18" height="14" viewBox="0 0 18 14" fill="none" aria-hidden="true"><rect x="0" y="0" width="18" height="6" rx="1" fill="currentColor"/><rect x="0" y="8" width="18" height="6" rx="1" fill="currentColor"/></svg></button></div></div>
-      <div class="hl-view-grid g3" id="hl-view-grid"></div>
+      <div class="hl-view-grid-wrap"><div class="hl-view-grid g3" id="hl-view-grid"></div></div>
       </div>
     </div>
   </div>

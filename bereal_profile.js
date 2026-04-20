@@ -1020,6 +1020,8 @@ function openHlSheet(mode,name,ctx){
       var h=getHighlightData(ctx||'mine',name);
       if(!h)h=hlData(6,0);
       document.getElementById('hl-view-cnt').textContent=h.count+' BeReals';
+      var capEl=document.getElementById('hl-view-caption');
+      if(capEl)capEl.textContent=name||'Highlight';
       var coverImg=document.getElementById('hl-view-cover-img');
       var vg=document.getElementById('hl-view-grid');
       if(coverImg){resetImgPh(coverImg);coverImg.removeAttribute('src');}

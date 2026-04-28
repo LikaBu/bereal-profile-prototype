@@ -242,10 +242,6 @@ input[type="text"],input[type="search"],textarea{cursor:text;}
 .grd.g1 .gir svg{width:14px;height:14px;}
 /* Public BeReals grid enhancements */
 .grd.g3 .gi::after,.grd.g2 .gi::after,.grd.g1 .gi::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.58) 0%,transparent 42%);pointer-events:none;z-index:1;}
-@supports (corner-shape: superellipse(0.6)){
-  .gi{corner-shape:superellipse(0.6);}
-  .gisf{corner-shape:superellipse(0.6);}
-}
 .grd.g3 .gir,.grd.g2 .gir{background:none;border-radius:0;}
 .grd.g1 .gir{display:none;}
 /* g3: larger text + icon, tighter to corner */

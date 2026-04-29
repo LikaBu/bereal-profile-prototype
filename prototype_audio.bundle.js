@@ -1036,7 +1036,7 @@
       function shouldPlayForTarget(t) {
         if (!t || !t.closest) return false;
         return !!t.closest(
-          "button, .sw, .seg-btn, .hl-item, .gi, .brc, .cp, .tab, .camb, .gi-act, .bbl, .mf-inline, .brd-back, .hl-sht-x, .ctx-menu"
+          "button, .sw, .seg-btn, .hl-item, .gi, .hl-vgi, .brc, .cp, .tab, .camb, .gi-act, .bbl, .mf-inline, .ctx-menu"
         );
       }
       function onPointerDown(e) {

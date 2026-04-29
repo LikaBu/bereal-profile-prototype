@@ -505,15 +505,11 @@ input[type="text"],input[type="search"],textarea{cursor:text;}
 /* Proto boot — load overlay + reveal */
 #proto-boot.proto-boot{position:fixed;inset:0;z-index:2147483000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:#000;color:rgba(255,255,255,.92);font-family:var(--font-text);transition:opacity .55s ease,visibility .55s ease;visibility:visible;}
 .proto-boot-icon{display:flex;align-items:center;justify-content:center;margin-bottom:2px;}
-/* Disney-style ring loader — adapted from https://codepen.io/jh3y/pen/OJrYGOY (neutral palette, no blue) */
-.proto-boot-jh{--pb-size:100px;--pb-border:10px;--pb-speed:1s;--pb-blur:var(--pb-border);position:relative;width:var(--pb-size);height:var(--pb-size);flex-shrink:0;}
-.proto-boot-jh-dot{width:var(--pb-border);aspect-ratio:1;background:rgba(255,255,255,.95);border-radius:50%;position:absolute;left:50%;top:50%;margin-left:calc(var(--pb-border)*-.5);margin-top:calc(var(--pb-border)*-.5);--y:calc((var(--pb-size)*-.5)+(var(--pb-border)*.5));transform:rotate(0deg) translateY(var(--y));animation:proto-boot-jh-spin var(--pb-speed) infinite linear;}
-.proto-boot-jh-dot::before{content:"";position:absolute;inset:calc(var(--pb-border)*-.5);border-radius:50%;background:rgba(255,255,255,.75);filter:blur(var(--pb-blur));z-index:-1;}
-.proto-boot-jh-dot::after{content:"";width:var(--pb-size);aspect-ratio:1;position:absolute;top:0;left:50%;transform:translateX(-50%);background:conic-gradient(rgba(255,255,255,.95),rgba(255,255,255,.42),rgba(255,255,255,.12),rgba(120,120,120,.35),transparent 65%);border-radius:50%;mask:radial-gradient(transparent calc(((var(--pb-size)*.5)-var(--pb-border)) - 1px),#fff calc((var(--pb-size)*.5)-var(--pb-border)));}
-@keyframes proto-boot-jh-spin{to{transform:rotate(-360deg) translateY(var(--y));}}
+#proto-boot .loader{width:48px;height:48px;border-radius:50%;display:inline-block;border-top:3px solid #FFF;border-right:3px solid transparent;box-sizing:border-box;animation:rotation 1s linear infinite;}
+@keyframes rotation{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
 .proto-boot-title{margin:0;font-size:22px;font-weight:600;letter-spacing:.02em;}
 .proto-boot-progress{margin:0;font-size:18px;font-weight:500;color:rgba(255,255,255,.62);letter-spacing:.02em;}
 body.proto-loading .sw-bar,body.proto-loading .bezel-container{opacity:0;filter:blur(22px) saturate(0.92);transform:scale(.8);pointer-events:none;will-change:opacity,filter,transform;}
 body.proto-ready .sw-bar,body.proto-ready .bezel-container{opacity:1;filter:blur(0) saturate(1);transform:scale(1);transition:opacity .95s cubic-bezier(.22,1,.36,1),filter .95s cubic-bezier(.22,1,.36,1),transform 1s cubic-bezier(.34,1.2,.64,1);pointer-events:auto;}
 body.proto-ready #proto-boot{opacity:0;visibility:hidden;pointer-events:none;}
-@media (prefers-reduced-motion:reduce){body.proto-ready .sw-bar,body.proto-ready .bezel-container{transition-duration:.01ms}#proto-boot.proto-boot{transition-duration:.01ms}.proto-boot-jh-dot{animation-duration:.01ms}}
+@media (prefers-reduced-motion:reduce){body.proto-ready .sw-bar,body.proto-ready .bezel-container{transition-duration:.01ms}#proto-boot.proto-boot{transition-duration:.01ms}#proto-boot .loader{animation-duration:.01ms}}

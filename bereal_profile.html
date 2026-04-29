@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer"><link rel="preload" href="bereal_profile.css?v=20260430k" as="style"><link rel="stylesheet" href="bereal_profile.css?v=20260430k"></head>
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer"><link rel="preload" href="bereal_profile.css?v=20260430l" as="style"><link rel="stylesheet" href="bereal_profile.css?v=20260430l"></head>
 <body class="proto-loading">
 <div id="proto-boot" class="proto-boot" aria-busy="true" aria-live="polite"><div class="proto-boot-stack"><div class="proto-boot-icon" aria-hidden="true"><span class="loader"></span></div><p class="proto-boot-pctline"><span id="proto-boot-pct-host" class="proto-boot-pctwrap"><number-flow id="proto-boot-pct-flow" class="proto-boot-nf" data-will-change></number-flow></span></p><div class="proto-boot-note" role="note"><span class="proto-boot-note-line">This prototype is fully coded by me Lika 😇</span><span class="proto-boot-note-line">I hope you like it</span></div></div></div>
 <div id="ctx-menu-bd" class="ctx-menu-backdrop" onclick="closeCtxMenu()" aria-hidden="true"></div>
@@ -268,11 +268,17 @@
   if(!bootEl)return;
   var NF_MAIN='https://esm.sh/number-flow@0.6.0';
   var NF_PLUGINS='https://esm.sh/number-flow@0.6.0/plugins';
-  function imgPct(){
+  var PCT_POLL_MS=240;
+  var pctShownMax=0;
+  function imgPctRaw(){
     var imgs=document.images,n=imgs.length,i,c=0;
     if(!n)return 100;
     for(i=0;i<n;i++){ if(imgs[i].complete)c++; }
     return Math.min(100,Math.round((c/n)*100));
+  }
+  function imgPctMonotonic(){
+    pctShownMax=Math.max(pctShownMax,imgPctRaw());
+    return pctShownMax;
   }
   function removeBoot(delay){
     bootEl.setAttribute('aria-busy','false');
@@ -295,9 +301,9 @@
     if(!host)return;
     host.innerHTML='<span class="proto-boot-pct-fallback"><span id="proto-boot-pct-fb">0</span><span class="proto-boot-pct-sfx">%</span></span>';
     var num=document.getElementById('proto-boot-pct-fb');
-    function tick(){ num.textContent=String(imgPct()); }
+    function tick(){ num.textContent=String(imgPctMonotonic()); }
     tick();
-    var pollId=setInterval(tick,80);
+    var pollId=setInterval(tick,PCT_POLL_MS);
     window.addEventListener('load',function(){
       clearInterval(pollId);
       num.textContent='100';
@@ -311,12 +317,12 @@
     if(!nf||typeof nf.update!=='function'){ runFallback(); return; }
     nf.numberSuffix='%';
     nf.trend=1;
-    nf.transformTiming={ duration:420, easing:'cubic-bezier(0.22,1,0.36,1)' };
-    nf.spinTiming={ duration:520, easing:'cubic-bezier(0.34,1.2,0.64,1)' };
-    nf.opacityTiming={ duration:260, easing:'ease-out' };
+    nf.transformTiming={ duration:720, easing:'cubic-bezier(0.22,1,0.36,1)' };
+    nf.spinTiming={ duration:900, easing:'cubic-bezier(0.34,1.2,0.64,1)' };
+    nf.opacityTiming={ duration:420, easing:'ease-out' };
     if(mod&&mod.continuous)nf.plugins=[mod.continuous];
     nf.update(0);
-    var pollId=setInterval(function(){ nf.update(imgPct()); },80);
+    var pollId=setInterval(function(){ nf.update(imgPctMonotonic()); },PCT_POLL_MS);
     window.addEventListener('load',function(){
       clearInterval(pollId);
       nf.update(100);
@@ -325,7 +331,7 @@
   }).catch(runFallback);
 })();
 </script>
-<script src="prototype_audio.bundle.js?v=20260430k" defer></script>
-<script src="bereal_profile.js?v=20260430k" defer></script>
+<script src="prototype_audio.bundle.js?v=20260430l" defer></script>
+<script src="bereal_profile.js?v=20260430l" defer></script>
 
 </body></html>

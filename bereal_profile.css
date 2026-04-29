@@ -39,7 +39,7 @@
 @font-face{font-family:'SFT';font-style:italic;font-weight:100 900;src:url('SF-Pro-Italic.ttf') format('truetype');}
 @font-face{font-family:'SFD';font-style:normal;font-weight:700;src:url('SF-Pro-Fonts/SF-Pro-Display-Bold.otf') format('opentype'),url('SF-Pro.ttf') format('truetype');}
 *{box-sizing:border-box;margin:0;padding:0;}
-html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
+html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;height:100%;}
 /* Typography tokens — SF Pro Text (SFT) = “SF Pro”; sizes in px = DS pt values; letter-spacing in px (CHARACTER). */
 :root{
   --font-text:'SFT',-apple-system,sans-serif;
@@ -59,7 +59,7 @@ html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
   --caption-m-size:12px; --caption-m-line:16px; --caption-m-track:0px;
   --caption-s-size:11px; --caption-s-line:13px; --caption-s-track:0.06px;
 }
-body{background:#0d0d0d;display:flex;flex-direction:column;align-items:center;padding:24px 16px 64px;font-family:var(--font-text);color:var(--text-primary);cursor:default;}
+body{background:#0d0d0d;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100%;min-height:100vh;min-height:100dvh;padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(24px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));font-family:var(--font-text);color:var(--text-primary);cursor:default;}
 input[type="text"],input[type="search"],textarea{cursor:text;}
 .sw-bar{display:flex;gap:4px;background:transparent;border-radius:100px;padding:4px;margin-bottom:20px;overflow-x:auto;scrollbar-width:none;}
 .sw-bar::-webkit-scrollbar{display:none;}

@@ -1010,12 +1010,29 @@
       var playTap = defineSound(tap);
       var playTabSwitch = defineSound(tabSwitch);
       var playSelect = defineSound(select);
+      var playSwoosh = defineSound(swoosh);
+      var playPageExit = defineSound(pageExit);
+      function volOpts() {
+        return { volume: UI_SOUND_VOL };
+      }
       function safe(fn) {
         try {
           fn();
         } catch (_e) {
         }
       }
+      window.protoUiSound = {
+        swoosh: function() {
+          safe(function() {
+            playSwoosh(volOpts());
+          });
+        },
+        pageExit: function() {
+          safe(function() {
+            playPageExit(volOpts());
+          });
+        }
+      };
       function shouldPlayForTarget(t) {
         if (!t || !t.closest) return false;
         return !!t.closest(
@@ -1023,9 +1040,10 @@
         );
       }
       function onPointerDown(e) {
+        if (e.target.closest(".brd-back, .bsh-close, .hl-sht-x")) return;
         if (!shouldPlayForTarget(e.target)) return;
         var el = e.target;
-        var v = { volume: UI_SOUND_VOL };
+        var v = volOpts();
         if (el.closest(".sw") || el.closest(".tab")) safe(function() {
           playTabSwitch(v);
         });

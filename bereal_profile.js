@@ -38,6 +38,12 @@ function showToast(message){
     toast.classList.remove('on');
   },1600);
 }
+function protoSfxSwoosh(){
+  if(window.protoUiSound&&typeof window.protoUiSound.swoosh==='function')window.protoUiSound.swoosh();
+}
+function protoSfxPageExit(){
+  if(window.protoUiSound&&typeof window.protoUiSound.pageExit==='function')window.protoUiSound.pageExit();
+}
 function savePrototypeState(){
   if(!BASE_MINE_HIGHLIGHTS)return;
   var customMineHighlights={};
@@ -686,9 +692,12 @@ function openSheet(id){
   }
 }
 function closeSheet(){
-  document.getElementById('bsh-bd').classList.remove('open');
+  var bd=document.getElementById('bsh-bd');
+  var wasOpen=bd&&bd.classList.contains('open');
+  if(bd)bd.classList.remove('open');
   var sh=document.getElementById('bsheet');
   if(sh){sh.classList.remove('open');sh.classList.remove('bsheet--no-explore');}
+  if(wasOpen)protoSfxPageExit();
 }
 function setupPinch(id){
   var g=document.getElementById('grd-'+id);
@@ -847,6 +856,7 @@ var BR_CTX={
 };
 function openBeRealDetail(mainSrc,sfSrc,ctx){
   closeCtxMenu();
+  protoSfxSwoosh();
   var d=BR_CTX[ctx]||BR_CTX.mine;
   var br=document.getElementById('br-detail');
   var wasOpen=br.classList.contains('open');
@@ -924,9 +934,12 @@ function resetBeRealDetailMedia(){
   if(hd)hd.style.display='none';
 }
 function closeBeRealDetail(){
+  var br=document.getElementById('br-detail');
+  var wasOpen=br&&br.classList.contains('open');
   closeCtxMenu();
   resetBeRealDetailMedia();
-  document.getElementById('br-detail').classList.remove('open');
+  if(br)br.classList.remove('open');
+  if(wasOpen)protoSfxPageExit();
 }
 function closeCtxMenu(){
   var bd=document.getElementById('ctx-menu-bd');
@@ -1209,14 +1222,17 @@ function openHlSheet(mode,name,ctx){
   },420);
 }
 function closeHlSheet(){
-  closeCtxMenu();
   var sht=document.getElementById('hl-sht');
+  var wasOpen=sht&&sht.classList.contains('open');
+  closeCtxMenu();
+  if(!sht)return;
   sht.dataset.hlApplyTok=String((parseInt(sht.dataset.hlApplyTok,10)||0)+1);
   sht.classList.remove('open');
   var creator=document.getElementById('hl-creator');
   var viewer=document.getElementById('hl-viewer');
   if(creator)creator.style.animation='';
   if(viewer)viewer.style.animation='';
+  if(wasOpen)protoSfxPageExit();
 }
 function resetHlCreator(){
   document.getElementById('hl-name-field').value='';

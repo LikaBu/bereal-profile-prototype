@@ -180,18 +180,11 @@ function shuffleProfileImages(){
 }
 function showScreen(id){
   var screenId=id==='nonfriend-private'?'nonfriend':id;
-  var hadOn=document.querySelector('.screen.on');
-  var wasSwitch=!!(hadOn&&hadOn.id!=='s-'+screenId);
-  var ph=document.querySelector('.ph');
-  if(wasSwitch&&ph)ph.classList.add('instant-profile-switch');
   var brd=document.getElementById('br-detail');
   if(brd&&brd.classList.contains('open'))closeBeRealDetail();
   document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('on');});
   var activeScreen=document.querySelector('#s-'+screenId);
-  if(!activeScreen){
-    if(ph)ph.classList.remove('instant-profile-switch');
-    return;
-  }
+  if(!activeScreen)return;
   activeScreen.classList.add('on');
   activeScreen.scrollTop=0;
   document.querySelectorAll('.sw').forEach(function(b){b.classList.remove('on');});
@@ -200,11 +193,6 @@ function showScreen(id){
   if(screenId==='nonfriend')setNonfriendPrivacy(id==='nonfriend-private');
   clearAllStoryTimers();
   startStoryAutoplay(screenId);
-  if(wasSwitch&&ph){
-    requestAnimationFrame(function(){
-      requestAnimationFrame(function(){ph.classList.remove('instant-profile-switch');});
-    });
-  }
   savePrototypeState();
 }
 var CAR={mine:{cur:0,n:5,selfies:MY_SELFIES},friend:{cur:0,n:3,selfies:FR_SELFIES},nonfriend:{cur:0,n:0,selfies:{}},official:{cur:0,n:0,selfies:{}}};

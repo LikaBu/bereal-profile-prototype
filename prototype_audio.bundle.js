@@ -1006,7 +1006,7 @@
     "prototype_audio_entry.js"() {
       init_dist();
       init_minimal();
-      var UI_SOUND_VOL = 0.6;
+      var UI_SOUND_VOL = 0.32;
       var playTap = defineSound(tap);
       var playTabSwitch = defineSound(tabSwitch);
       var playSelect = defineSound(select);

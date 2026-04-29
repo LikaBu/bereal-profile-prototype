@@ -10,7 +10,7 @@ import {
   select as selectDef,
 } from "./.web-kits/minimal.ts";
 
-var UI_SOUND_VOL = 0.6;
+var UI_SOUND_VOL = 0.32;
 var playTap = defineSound(tapDef);
 var playTabSwitch = defineSound(tabSwitchDef);
 var playSelect = defineSound(selectDef);

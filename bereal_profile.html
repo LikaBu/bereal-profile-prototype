@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer"><link rel="preload" href="bereal_profile.css?v=20260430f" as="style"><link rel="stylesheet" href="bereal_profile.css?v=20260430f"></head>
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer"><link rel="preload" href="bereal_profile.css?v=20260430g" as="style"><link rel="stylesheet" href="bereal_profile.css?v=20260430g"></head>
 <body class="proto-loading">
-<div id="proto-boot" class="proto-boot" aria-busy="true" aria-live="polite"><div class="proto-boot-icon" aria-hidden="true"><span class="loader"></span></div><p class="proto-boot-line">Loading new bereal profile… <span class="proto-boot-num"><span id="proto-boot-pct">0</span>%</span></p></div>
+<div id="proto-boot" class="proto-boot" aria-busy="true" aria-live="polite"><div class="proto-boot-row"><div class="proto-boot-icon" aria-hidden="true"><span class="loader"></span></div><p class="proto-boot-pctline"><span class="proto-boot-pctwrap"><span id="proto-boot-pct">0</span>%</span></p></div></div>
 <div id="ctx-menu-bd" class="ctx-menu-backdrop" onclick="closeCtxMenu()" aria-hidden="true"></div>
 <div id="ctx-menu-panel" class="ctx-menu" role="menu" aria-hidden="true"><div id="ctx-menu-body" class="ctx-menu-body"></div></div>
 <div class="sw-bar">
@@ -37,7 +37,7 @@
   </div>
   <div class="brb">
     <div class="br-top">
-      <p class="bcp">Add a caption...</p>
+      <p class="bcp">Quiet morning at the office before everyone arrived</p>
       <div class="br-meta"><span class="br-day">Yesterday</span><span class="br-clock">8:23 PM</span></div>
     </div>
     <div class="bft"><div class="avr"><div class="av"><img src="selfies_assets/CleanShot%202026-04-15%20at%2013.25.39%402x.png" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;"></div><div class="av"><img src="selfies_assets/CleanShot%202026-04-15%20at%2013.25.39%402x.png" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;"></div><div class="avm">3+</div><span class="av-lbl">5 reactions</span></div><div class="bft-r"><div class="br-rpill"><i class="far fa-face-smile"></i></div><button type="button" class="cmb" aria-label="Comment"><i class="far fa-comment"></i></button></div></div>
@@ -77,7 +77,7 @@
   </div>
   <div class="brb">
     <div class="br-top">
-      <p class="bcp">Working late while dreaming of a long walk by the river.</p>
+      <p class="bcp">Working late while dreaming of a long walk by the river</p>
       <div class="br-meta"><span class="br-day">Yesterday</span><span class="br-clock">8:23 PM</span></div>
     </div>
     <div class="bft"><div class="avr"><div class="av"><img src="selfies_assets/CleanShot%202026-04-15%20at%2013.25.39%402x.png" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;"></div><div class="av"><img src="selfies_assets/CleanShot%202026-04-15%20at%2013.27.34%402x.png" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;"></div><div class="avm">3+</div><span class="av-lbl">5 reactions</span></div><div class="bft-r"><div class="br-rpill"><i class="far fa-face-smile"></i></div><button type="button" class="cmb" aria-label="Comment"><i class="far fa-comment"></i></button></div></div>
@@ -155,7 +155,7 @@
   </div>
   <div class="brb">
     <div class="br-top">
-      <p class="bcp">Real moments, real people. ☀️</p>
+      <p class="bcp">Real moments, real people ☀️</p>
       <div class="br-meta"><span class="br-day">Today</span><span class="br-clock">2:00 PM</span></div>
     </div>
     <div class="bft"><div class="avr"><div class="av"><img src="selfies_assets/CleanShot%202026-04-15%20at%2013.25.39%402x.png" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;"></div><div class="av"><img src="selfies_assets/CleanShot%202026-04-15%20at%2013.28.07%402x.png" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;"></div><div class="avm">3+</div><span class="av-lbl">5 reactions</span></div><div class="bft-r"><div class="br-rpill"><i class="far fa-face-smile"></i></div><button type="button" class="cmb" aria-label="Comment"><i class="far fa-comment"></i></button></div></div>
@@ -250,33 +250,55 @@
 (function(){
   var bootEl=document.getElementById('proto-boot');
   var pctEl=document.getElementById('proto-boot-pct');
-  if(!pctEl)return;
+  var pollId=null;
   function imgPct(){
     var imgs=document.images,n=imgs.length,i,c=0;
-    if(!n)return 0;
+    if(!n)return 100;
     for(i=0;i<n;i++){ if(imgs[i].complete)c++; }
     return Math.min(100,Math.round((c/n)*100));
   }
-  function tick(){ pctEl.textContent=String(imgPct()); }
-  tick();
-  var pollId=setInterval(tick,80);
-  window.addEventListener('load',function(){
-    clearInterval(pollId);
-    pctEl.textContent='100';
+  function allImagesCached(){
+    var imgs=document.images,n=imgs.length,i;
+    if(!n)return true;
+    for(i=0;i<n;i++){ if(!imgs[i].complete)return false; }
+    return true;
+  }
+  function removeBoot(delay){
+    if(bootEl){
+      bootEl.setAttribute('aria-busy','false');
+      setTimeout(function(){ if(bootEl&&bootEl.parentNode)bootEl.parentNode.removeChild(bootEl); },delay||0);
+    }
+  }
+  function revealApp(bootFadeMs){
+    document.body.classList.remove('proto-loading');
+    document.body.classList.add('proto-ready');
+    removeBoot(typeof bootFadeMs==='number'?bootFadeMs:650);
+  }
+  function revealWhenReady(){
     document.fonts.ready.then(function(){
       requestAnimationFrame(function(){
-        requestAnimationFrame(function(){
-          document.body.classList.remove('proto-loading');
-          document.body.classList.add('proto-ready');
-          if(bootEl)bootEl.setAttribute('aria-busy','false');
-          setTimeout(function(){ if(bootEl&&bootEl.parentNode)bootEl.parentNode.removeChild(bootEl); },650);
-        });
+        requestAnimationFrame(function(){ revealApp(650); });
       });
     });
+  }
+  if(allImagesCached()){
+    document.body.classList.remove('proto-loading');
+    document.body.classList.add('proto-ready');
+    if(bootEl&&bootEl.parentNode)bootEl.parentNode.removeChild(bootEl);
+    return;
+  }
+  if(!pctEl)return;
+  function tick(){ pctEl.textContent=String(imgPct()); }
+  tick();
+  pollId=setInterval(tick,80);
+  window.addEventListener('load',function(){
+    if(pollId){ clearInterval(pollId); pollId=null; }
+    pctEl.textContent='100';
+    revealWhenReady();
   });
 })();
 </script>
-<script src="prototype_audio.bundle.js?v=20260430f" defer></script>
-<script src="bereal_profile.js?v=20260430f" defer></script>
+<script src="prototype_audio.bundle.js?v=20260430g" defer></script>
+<script src="bereal_profile.js?v=20260430g" defer></script>
 
 </body></html>

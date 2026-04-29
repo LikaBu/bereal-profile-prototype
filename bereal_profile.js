@@ -825,8 +825,8 @@ var CTX_EMOJIS={
 };
 var CTX_MAX_RMOJI={mine:2,friend:5,nonfriend:6,official:6};
 var BR_CTX={
-  mine:{username:'Lea',status:'On time',date:'Today at 3:25 PM',caption:null,location:'Paris, France',music:'Chris Brown - Feel Something',rmCount:5,commCount:0,comments:[]},
-  friend:{username:'Camille',status:'On time',date:'Yesterday at 7:12 PM',caption:'Working late while dreaming of a long walk by the river.',location:'Lyon, France',music:'Doja Cat - Streets',rmCount:47,commCount:3,comments:[
+  mine:{username:'Lea',status:'On time',date:'Today at 3:25 PM',caption:'Quiet morning at the office before everyone arrived',location:'Paris, France',music:'Chris Brown - Feel Something',rmCount:5,commCount:0,comments:[]},
+  friend:{username:'Camille',status:'On time',date:'Yesterday at 7:12 PM',caption:'Working late while dreaming of a long walk by the river',location:'Lyon, France',music:'Doja Cat - Streets',rmCount:47,commCount:3,comments:[
     {user:'sonatchi',time:'5min ago',text:'Looks like fun!',av:0},
     {user:'leo_m',time:'12min ago',text:'Love this vibe ✨',av:1},
     {user:'camille_p',time:'23min ago',text:'Miss you so much!',av:2}
@@ -835,7 +835,7 @@ var BR_CTX={
     {user:'pierre_t',time:'1h ago',text:'Incredible shot!',av:1},
     {user:'marie_d',time:'2h ago',text:'Nice! 🔥',av:3}
   ]},
-  official:{username:'BeReal',status:'On time',date:'Apr 16 at 10:00 AM',caption:'Real moments, real people.',location:'Worldwide',music:null,rmCount:14800,commCount:4,comments:[
+  official:{username:'BeReal',status:'On time',date:'Apr 16 at 10:00 AM',caption:'Real moments, real people ☀️',location:'Worldwide',music:null,rmCount:14800,commCount:4,comments:[
     {user:'ana_l',time:'3min ago',text:'Love BeReal!',av:0},
     {user:'max_r',time:'8min ago',text:'Every day 🙌',av:2},
     {user:'julia_k',time:'15min ago',text:'Such a vibe',av:4},

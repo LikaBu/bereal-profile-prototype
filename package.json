@@ -1,0 +1,29 @@
+{
+  "name": "bereal-profile-prototype-live",
+  "version": "1.0.0",
+  "description": "BeReal profile HTML prototype; UI sounds via @web-kits/audio (see prototype_audio_entry.js).",
+  "main": "bereal_profile.js",
+  "scripts": {
+    "build:audio": "esbuild prototype_audio_entry.js --bundle --format=iife --platform=browser --outfile=prototype_audio.bundle.js",
+    "build": "npm run build:audio",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LikaBu/bereal-profile-prototype.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/LikaBu/bereal-profile-prototype/issues"
+  },
+  "homepage": "https://github.com/LikaBu/bereal-profile-prototype#readme",
+  "dependencies": {
+    "@web-kits/audio": "^0.1.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.0"
+  }
+}

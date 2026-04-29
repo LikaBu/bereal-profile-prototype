@@ -69,6 +69,12 @@ function savePrototypeState(){
   }
 }
 function restorePrototypeState(){
+  if(window.__PROTO_BOOT_FROM_CACHE__){
+    try{
+      window.localStorage.removeItem(PROTOTYPE_STATE_KEY);
+    }catch(_err){}
+    delete window.__PROTO_BOOT_FROM_CACHE__;
+  }
   if(!BASE_MINE_HIGHLIGHTS){
     setNonfriendPrivacy(false);
     showScreen('mine');

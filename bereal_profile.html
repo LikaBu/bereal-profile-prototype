@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><link rel="preload" href="bereal_profile.css?v=20260429c" as="style"><link rel="stylesheet" href="bereal_profile.css?v=20260429c"></head>
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><link rel="preload" href="bereal_profile.css?v=20260429d" as="style"><link rel="stylesheet" href="bereal_profile.css?v=20260429d"></head>
 <body class="proto-loading">
-<div id="proto-boot" class="proto-boot" aria-busy="true" aria-live="polite"><p class="proto-boot-title">BeReal Profile</p><p class="proto-boot-progress" id="proto-boot-progress">Loading… 0%</p></div>
+<div id="proto-boot" class="proto-boot" aria-busy="true" aria-live="polite"><div class="proto-boot-icon" aria-hidden="true"><span class="proto-boot-spinner-el"></span></div><p class="proto-boot-title">BeReal Profile</p><p class="proto-boot-progress" id="proto-boot-progress">Loading… 0%</p></div>
 <div id="ctx-menu-bd" class="ctx-menu-backdrop" onclick="closeCtxMenu()" aria-hidden="true"></div>
 <div id="ctx-menu-panel" class="ctx-menu" role="menu" aria-hidden="true"><div id="ctx-menu-body" class="ctx-menu-body"></div></div>
 <div class="sw-bar">
@@ -238,7 +238,37 @@
 <img class="bezel-overlay" src="Bezel.png" alt="">
 </div>
 <div id="proto-toast" class="proto-toast" role="status" aria-live="polite"></div>
-<script src="prototype_audio.bundle.js?v=20260429c" defer></script>
-<script src="bereal_profile.js?v=20260429c" defer></script>
+<script>
+(function(){
+  var bootEl=document.getElementById('proto-boot');
+  var progEl=document.getElementById('proto-boot-progress');
+  if(!progEl)return;
+  function imgPct(){
+    var imgs=document.images,n=imgs.length,i,c=0;
+    if(!n)return 0;
+    for(i=0;i<n;i++){ if(imgs[i].complete)c++; }
+    return Math.min(100,Math.round((c/n)*100));
+  }
+  function tick(){ progEl.textContent='Loading… '+imgPct()+'%'; }
+  tick();
+  var pollId=setInterval(tick,80);
+  window.addEventListener('load',function(){
+    clearInterval(pollId);
+    progEl.textContent='Loading… 100%';
+    document.fonts.ready.then(function(){
+      requestAnimationFrame(function(){
+        requestAnimationFrame(function(){
+          document.body.classList.remove('proto-loading');
+          document.body.classList.add('proto-ready');
+          if(bootEl)bootEl.setAttribute('aria-busy','false');
+          setTimeout(function(){ if(bootEl&&bootEl.parentNode)bootEl.parentNode.removeChild(bootEl); },650);
+        });
+      });
+    });
+  });
+})();
+</script>
+<script src="prototype_audio.bundle.js?v=20260429d" defer></script>
+<script src="bereal_profile.js?v=20260429d" defer></script>
 
 </body></html>

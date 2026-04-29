@@ -1006,6 +1006,7 @@
     "prototype_audio_entry.js"() {
       init_dist();
       init_minimal();
+      var UI_SOUND_VOL = 0.6;
       var playTap = defineSound(tap);
       var playTabSwitch = defineSound(tabSwitch);
       var playSelect = defineSound(select);
@@ -1024,9 +1025,16 @@
       function onPointerDown(e) {
         if (!shouldPlayForTarget(e.target)) return;
         var el = e.target;
-        if (el.closest(".sw") || el.closest(".tab")) safe(playTabSwitch);
-        else if (el.closest(".seg-btn")) safe(playSelect);
-        else safe(playTap);
+        var v = { volume: UI_SOUND_VOL };
+        if (el.closest(".sw") || el.closest(".tab")) safe(function() {
+          playTabSwitch(v);
+        });
+        else if (el.closest(".seg-btn")) safe(function() {
+          playSelect(v);
+        });
+        else safe(function() {
+          playTap(v);
+        });
       }
       function init() {
         document.addEventListener("pointerdown", onPointerDown, true);

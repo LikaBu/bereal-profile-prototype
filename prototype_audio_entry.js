@@ -10,6 +10,7 @@ import {
   select as selectDef,
 } from "./.web-kits/minimal.ts";
 
+var UI_SOUND_VOL = 0.6;
 var playTap = defineSound(tapDef);
 var playTabSwitch = defineSound(tabSwitchDef);
 var playSelect = defineSound(selectDef);
@@ -32,9 +33,10 @@ function shouldPlayForTarget(t) {
 function onPointerDown(e) {
   if (!shouldPlayForTarget(e.target)) return;
   var el = e.target;
-  if (el.closest(".sw") || el.closest(".tab")) safe(playTabSwitch);
-  else if (el.closest(".seg-btn")) safe(playSelect);
-  else safe(playTap);
+  var v = { volume: UI_SOUND_VOL };
+  if (el.closest(".sw") || el.closest(".tab")) safe(function () { playTabSwitch(v); });
+  else if (el.closest(".seg-btn")) safe(function () { playSelect(v); });
+  else safe(function () { playTap(v); });
 }
 
 function init() {

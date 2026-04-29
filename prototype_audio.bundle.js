@@ -964,18 +964,54 @@
     }
   });
 
+  // .web-kits/minimal.ts
+  var tap, click, keyPress, toggleOn, toggleOff, checkbox, select, deselect, hover, tabSwitch, expand, collapse, pageEnter, pageExit, success, error, warning, notification, info, copy, send, _delete, undo, pop, swoosh, slide, _patch;
+  var init_minimal = __esm({
+    ".web-kits/minimal.ts"() {
+      tap = { "source": { "type": "sine", "frequency": 1200 }, "envelope": { "attack": 0, "decay": 0.012, "sustain": 0, "release": 4e-3 }, "gain": 0.08 };
+      click = { "source": { "type": "sine", "frequency": 800 }, "envelope": { "attack": 0, "decay": 0.015, "sustain": 0, "release": 5e-3 }, "gain": 0.1 };
+      keyPress = { "source": { "type": "sine", "frequency": 1100 }, "envelope": { "attack": 0, "decay": 0.01, "sustain": 0, "release": 3e-3 }, "gain": 0.06 };
+      toggleOn = { "layers": [{ "source": { "type": "sine", "frequency": 880 }, "envelope": { "attack": 0, "decay": 0.02, "sustain": 0, "release": 6e-3 }, "gain": 0.08 }, { "source": { "type": "sine", "frequency": 1320 }, "envelope": { "attack": 0, "decay": 0.02, "sustain": 0, "release": 6e-3 }, "delay": 0.03, "gain": 0.07 }] };
+      toggleOff = { "layers": [{ "source": { "type": "sine", "frequency": 1320 }, "envelope": { "attack": 0, "decay": 0.02, "sustain": 0, "release": 6e-3 }, "gain": 0.08 }, { "source": { "type": "sine", "frequency": 880 }, "envelope": { "attack": 0, "decay": 0.02, "sustain": 0, "release": 6e-3 }, "delay": 0.03, "gain": 0.07 }] };
+      checkbox = { "source": { "type": "sine", "frequency": 1e3 }, "envelope": { "attack": 0, "decay": 0.018, "sustain": 0, "release": 5e-3 }, "gain": 0.09 };
+      select = { "source": { "type": "sine", "frequency": 1100 }, "envelope": { "attack": 0, "decay": 0.02, "sustain": 0, "release": 6e-3 }, "gain": 0.08 };
+      deselect = { "source": { "type": "sine", "frequency": 900 }, "envelope": { "attack": 0, "decay": 0.018, "sustain": 0, "release": 5e-3 }, "gain": 0.06 };
+      hover = { "source": { "type": "sine", "frequency": 1300 }, "envelope": { "attack": 0, "decay": 0.01, "sustain": 0, "release": 4e-3 }, "gain": 0.04 };
+      tabSwitch = { "source": { "type": "sine", "frequency": 1050 }, "envelope": { "attack": 0, "decay": 0.015, "sustain": 0, "release": 5e-3 }, "gain": 0.07 };
+      expand = { "source": { "type": "sine", "frequency": { "start": 800, "end": 1e3 } }, "envelope": { "attack": 0, "decay": 0.04, "sustain": 0, "release": 0.012 }, "gain": 0.06 };
+      collapse = { "source": { "type": "sine", "frequency": { "start": 1e3, "end": 800 } }, "envelope": { "attack": 0, "decay": 0.04, "sustain": 0, "release": 0.012 }, "gain": 0.06 };
+      pageEnter = { "source": { "type": "sine", "frequency": { "start": 700, "end": 900 } }, "envelope": { "attack": 3e-3, "decay": 0.04, "sustain": 0, "release": 0.015 }, "gain": 0.05 };
+      pageExit = { "source": { "type": "sine", "frequency": { "start": 900, "end": 700 } }, "envelope": { "attack": 0, "decay": 0.04, "sustain": 0, "release": 0.015 }, "gain": 0.04 };
+      success = { "layers": [{ "source": { "type": "sine", "frequency": 523 }, "envelope": { "attack": 0, "decay": 0.05, "sustain": 0, "release": 0.015 }, "gain": 0.1 }, { "source": { "type": "sine", "frequency": 784 }, "envelope": { "attack": 0, "decay": 0.05, "sustain": 0, "release": 0.015 }, "delay": 0.06, "gain": 0.08 }] };
+      error = { "layers": [{ "source": { "type": "sine", "frequency": 300 }, "envelope": { "attack": 0, "decay": 0.04, "sustain": 0, "release": 0.012 }, "gain": 0.12 }, { "source": { "type": "sine", "frequency": 280 }, "envelope": { "attack": 0, "decay": 0.04, "sustain": 0, "release": 0.012 }, "delay": 0.01, "gain": 0.1 }] };
+      warning = { "layers": [{ "source": { "type": "sine", "frequency": 440 }, "envelope": { "attack": 0, "decay": 0.03, "sustain": 0, "release": 0.01 }, "gain": 0.1 }, { "source": { "type": "sine", "frequency": 466 }, "envelope": { "attack": 0, "decay": 0.03, "sustain": 0, "release": 0.01 }, "delay": 8e-3, "gain": 0.08 }] };
+      notification = { "layers": [{ "source": { "type": "sine", "frequency": 660 }, "envelope": { "attack": 0, "decay": 0.05, "sustain": 0, "release": 0.02 }, "gain": 0.1 }, { "source": { "type": "sine", "frequency": 880 }, "envelope": { "attack": 0, "decay": 0.04, "sustain": 0, "release": 0.015 }, "delay": 0.08, "gain": 0.08 }] };
+      info = { "source": { "type": "sine", "frequency": 880 }, "envelope": { "attack": 0, "decay": 0.04, "sustain": 0, "release": 0.015 }, "gain": 0.08 };
+      copy = { "layers": [{ "source": { "type": "sine", "frequency": 1e3 }, "envelope": { "attack": 0, "decay": 0.012, "sustain": 0, "release": 4e-3 }, "gain": 0.08 }, { "source": { "type": "sine", "frequency": 1200 }, "envelope": { "attack": 0, "decay": 0.012, "sustain": 0, "release": 4e-3 }, "delay": 0.035, "gain": 0.07 }] };
+      send = { "source": { "type": "sine", "frequency": { "start": 600, "end": 1e3 } }, "envelope": { "attack": 0, "decay": 0.04, "sustain": 0, "release": 0.012 }, "gain": 0.08 };
+      _delete = { "source": { "type": "sine", "frequency": { "start": 500, "end": 250 } }, "envelope": { "attack": 0, "decay": 0.05, "sustain": 0, "release": 0.015 }, "gain": 0.1 };
+      undo = { "source": { "type": "sine", "frequency": { "start": 800, "end": 600 } }, "envelope": { "attack": 0, "decay": 0.035, "sustain": 0, "release": 0.01 }, "gain": 0.07 };
+      pop = { "source": { "type": "sine", "frequency": { "start": 400, "end": 200 } }, "envelope": { "attack": 0, "decay": 0.04, "sustain": 0, "release": 0.012 }, "gain": 0.1 };
+      swoosh = { "source": { "type": "sine", "frequency": { "start": 600, "end": 1400 } }, "envelope": { "attack": 5e-3, "decay": 0.04, "sustain": 0, "release": 0.015 }, "gain": 0.05 };
+      slide = { "source": { "type": "sine", "frequency": { "start": 800, "end": 1100 } }, "envelope": { "attack": 3e-3, "decay": 0.035, "sustain": 0, "release": 0.012 }, "gain": 0.05 };
+      _patch = {
+        ...{ "name": "Minimal", "author": "Raphael Salaja", "version": "1.0.0", "description": "An ultra-clean sine-based palette for quiet, transparent UI feedback, made for products that prioritize subtlety, restraint, and smooth interaction cues over expressive flourish." },
+        sounds: { tap, click, "key-press": keyPress, "toggle-on": toggleOn, "toggle-off": toggleOff, checkbox, select, deselect, hover, "tab-switch": tabSwitch, expand, collapse, "page-enter": pageEnter, "page-exit": pageExit, success, error, warning, notification, info, copy, send, "delete": _delete, undo, pop, swoosh, slide }
+      };
+    }
+  });
+
   // prototype_audio_entry.js
   var require_prototype_audio_entry = __commonJS({
     "prototype_audio_entry.js"() {
       init_dist();
-      var tap = defineSound({
-        source: { type: "sine", frequency: { start: 520, end: 190 } },
-        envelope: { decay: 0.05 },
-        gain: 0.2
-      });
-      function playTap() {
+      init_minimal();
+      var playTap = defineSound(tap);
+      var playTabSwitch = defineSound(tabSwitch);
+      var playSelect = defineSound(select);
+      function safe(fn) {
         try {
-          tap();
+          fn();
         } catch (_e) {
         }
       }
@@ -986,7 +1022,11 @@
         );
       }
       function onPointerDown(e) {
-        if (shouldPlayForTarget(e.target)) playTap();
+        if (!shouldPlayForTarget(e.target)) return;
+        var el = e.target;
+        if (el.closest(".sw") || el.closest(".tab")) safe(playTabSwitch);
+        else if (el.closest(".seg-btn")) safe(playSelect);
+        else safe(playTap);
       }
       function init() {
         document.addEventListener("pointerdown", onPointerDown, true);

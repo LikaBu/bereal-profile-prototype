@@ -1,18 +1,22 @@
 /**
- * UI feedback using @web-kits/audio — bundled for static GitHub Pages.
+ * UI sounds from @web-kits/audio patch "Minimal" (raphaelsalaja/audio).
+ * Installed with: npx @web-kits/audio add raphaelsalaja/audio --patch minimal
  * https://audio.raphaelsalaja.com/
  */
 import { defineSound } from "@web-kits/audio";
+import {
+  tap as tapDef,
+  tabSwitch as tabSwitchDef,
+  select as selectDef,
+} from "./.web-kits/minimal.ts";
 
-var tap = defineSound({
-  source: { type: "sine", frequency: { start: 520, end: 190 } },
-  envelope: { decay: 0.05 },
-  gain: 0.2,
-});
+var playTap = defineSound(tapDef);
+var playTabSwitch = defineSound(tabSwitchDef);
+var playSelect = defineSound(selectDef);
 
-function playTap() {
+function safe(fn) {
   try {
-    tap();
+    fn();
   } catch (_e) {
     // ignore
   }
@@ -26,7 +30,11 @@ function shouldPlayForTarget(t) {
 }
 
 function onPointerDown(e) {
-  if (shouldPlayForTarget(e.target)) playTap();
+  if (!shouldPlayForTarget(e.target)) return;
+  var el = e.target;
+  if (el.closest(".sw") || el.closest(".tab")) safe(playTabSwitch);
+  else if (el.closest(".seg-btn")) safe(playSelect);
+  else safe(playTap);
 }
 
 function init() {

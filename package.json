@@ -5,6 +5,7 @@
   "main": "bereal_profile.js",
   "scripts": {
     "build:audio": "esbuild prototype_audio_entry.js --bundle --format=iife --platform=browser --outfile=prototype_audio.bundle.js",
+    "patches:add-minimal": "npx @web-kits/audio add raphaelsalaja/audio --patch minimal",
     "build": "npm run build:audio",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

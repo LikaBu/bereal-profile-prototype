@@ -204,7 +204,7 @@ input[type="text"],input[type="search"],textarea{cursor:text;}
 /* Highlights */
 .hl-row{display:flex;gap:8px;padding:2px 20px 4px;overflow-x:auto;scrollbar-width:none;}
 .hl-row::-webkit-scrollbar{display:none;}
-.hl-item{display:flex;flex-direction:column;align-items:center;gap:6px;cursor:default;flex-shrink:0;transition:transform 150ms ease-out;}
+.hl-item{display:flex;flex-direction:column;align-items:center;gap:8px;cursor:default;flex-shrink:0;transition:transform 150ms ease-out;}
 .hl-item:active{transform:scale(.96);}
 .hl-circle{width:86px;height:116px;border-radius:16px;overflow:hidden;background:#1C1C1E;}
 .hl-circle img{width:100%;height:100%;object-fit:cover;display:block;}

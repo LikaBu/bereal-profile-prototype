@@ -190,6 +190,8 @@ function syncSwPill(opts){
   var pill=bar&&bar.querySelector('.sw-pill');
   var active=bar&&bar.querySelector('.sw.on');
   if(!bar||!pill||!active)return;
+  // Boot overlay scales .sw-bar (transform); measuring now would freeze wrong width/position.
+  if(document.body.classList.contains('proto-loading'))return;
   var instant;
   if(opts&&opts.instant===true)instant=true;
   else if(opts&&opts.instant===false)instant=false;
@@ -1125,10 +1127,41 @@ restorePrototypeState();
   var bar=document.getElementById('sw-bar');
   if(!bar)return;
   function snapPill(){ syncSwPill({instant:true}); }
+  function scheduleSnap(){
+    requestAnimationFrame(function(){
+      requestAnimationFrame(snapPill);
+    });
+  }
   window.addEventListener('resize',snapPill);
   bar.addEventListener('scroll',function(){ requestAnimationFrame(snapPill); },{passive:true});
   if(document.fonts&&document.fonts.ready){
-    document.fonts.ready.then(function(){ requestAnimationFrame(snapPill); });
+    document.fonts.ready.then(scheduleSnap);
+  }
+  function syncAfterBootReveal(){
+    scheduleSnap();
+    var settled=false;
+    function settle(){
+      if(settled)return;
+      settled=true;
+      snapPill();
+    }
+    bar.addEventListener('transitionend',function onTe(e){
+      if(e.target!==bar||e.propertyName!=='transform')return;
+      bar.removeEventListener('transitionend',onTe);
+      settle();
+    });
+    window.setTimeout(settle,1200);
+  }
+  if(document.body.classList.contains('proto-ready')){
+    syncAfterBootReveal();
+  }else{
+    var mo=new MutationObserver(function(){
+      if(document.body.classList.contains('proto-ready')){
+        mo.disconnect();
+        syncAfterBootReveal();
+      }
+    });
+    mo.observe(document.body,{attributes:true,attributeFilter:['class']});
   }
 })();
 function escJsStr(s){

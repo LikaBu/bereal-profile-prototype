@@ -77,7 +77,7 @@ function restorePrototypeState(){
   }
   if(!BASE_MINE_HIGHLIGHTS){
     setNonfriendPrivacy(false);
-    showScreen('mine');
+    showScreen('mine',{fromRestore:true});
     return;
   }
   var targetScreen='mine';
@@ -111,7 +111,7 @@ function restorePrototypeState(){
   if(['mine','friend','nonfriend','nonfriend-private','official'].indexOf(targetScreen)===-1){
     targetScreen='mine';
   }
-  showScreen(targetScreen);
+  showScreen(targetScreen,{fromRestore:true});
 }
 function syncMineHighlightRow(){
   var row=document.querySelector('#s-mine .hl-row');
@@ -208,7 +208,7 @@ function syncSwPill(opts){
     pill.classList.remove('sw-pill--no-motion');
   }
 }
-function showScreen(id){
+function showScreen(id,opts){
   var screenId=id==='nonfriend-private'?'nonfriend':id;
   var brd=document.getElementById('br-detail');
   if(brd&&brd.classList.contains('open'))closeBeRealDetail();
@@ -225,6 +225,10 @@ function showScreen(id){
   startStoryAutoplay(screenId);
   savePrototypeState();
   syncSwPill();
+  if(!(opts&&opts.fromRestore)){
+    var pil=document.querySelector('.sw-pill');
+    if(pil)pil.classList.remove('sw-pill--await-boot');
+  }
 }
 var CAR={mine:{cur:0,n:5,selfies:MY_SELFIES},friend:{cur:0,n:3,selfies:FR_SELFIES},nonfriend:{cur:0,n:0,selfies:{}},official:{cur:0,n:0,selfies:{}}};
 var SWAP_STATE={mine:{},friend:{},nonfriend:{},official:{}};
@@ -798,7 +802,7 @@ prepareExtraCarousel('official');
 initCarousel('nonfriend');
 initCarousel('official');
 setNonfriendPrivacy(false);
-showScreen('mine');
+showScreen('mine',{fromRestore:true});
 ['mine','friend','nonfriend','official'].forEach(setupPinch);
 function initGridSelfieSwap(){
   document.querySelectorAll('.grd').forEach(function(grd){
@@ -1126,6 +1130,7 @@ restorePrototypeState();
 (function(){
   var bar=document.getElementById('sw-bar');
   if(!bar)return;
+  var pill=bar.querySelector('.sw-pill');
   function snapPill(){ syncSwPill({instant:true}); }
   function scheduleSnap(){
     requestAnimationFrame(function(){
@@ -1137,28 +1142,46 @@ restorePrototypeState();
   if(document.fonts&&document.fonts.ready){
     document.fonts.ready.then(scheduleSnap);
   }
-  function syncAfterBootReveal(){
-    scheduleSnap();
-    var settled=false;
-    function settle(){
-      if(settled)return;
-      settled=true;
-      snapPill();
+  var bootRaf=null;
+  function revealBootPill(){
+    if(!pill||!pill.classList.contains('sw-pill--await-boot'))return;
+    if(bootRaf){cancelAnimationFrame(bootRaf);bootRaf=null;}
+    syncSwPill({instant:true});
+    pill.classList.remove('sw-pill--await-boot');
+  }
+  function isBarScaleSettled(){
+    if(document.body.classList.contains('proto-loading'))return false;
+    var tf=getComputedStyle(bar).transform;
+    if(!tf||tf==='none')return true;
+    try{
+      if(typeof DOMMatrixReadOnly!=='undefined'){
+        var mm=new DOMMatrixReadOnly(tf);
+        return Math.abs(mm.a-1)<0.004&&Math.abs(mm.d-1)<0.004;
+      }
+    }catch(_e){}
+    var parts=/^matrix\(([-0-9.e+]+),\s*([-0-9.e+]+),\s*([-0-9.e+]+),\s*([-0-9.e+]+)/.exec(tf);
+    if(parts)return Math.abs(parseFloat(parts[1])-1)<0.004&&Math.abs(parseFloat(parts[4])-1)<0.004;
+    return false;
+  }
+  function pollBootPill(){
+    var start=Date.now();
+    function tick(){
+      if(!pill||!pill.classList.contains('sw-pill--await-boot'))return;
+      if(isBarScaleSettled()||Date.now()-start>1400){
+        revealBootPill();
+        return;
+      }
+      bootRaf=requestAnimationFrame(tick);
     }
-    bar.addEventListener('transitionend',function onTe(e){
-      if(e.target!==bar||e.propertyName!=='transform')return;
-      bar.removeEventListener('transitionend',onTe);
-      settle();
-    });
-    window.setTimeout(settle,1200);
+    bootRaf=requestAnimationFrame(tick);
   }
   if(document.body.classList.contains('proto-ready')){
-    syncAfterBootReveal();
+    pollBootPill();
   }else{
     var mo=new MutationObserver(function(){
       if(document.body.classList.contains('proto-ready')){
         mo.disconnect();
-        syncAfterBootReveal();
+        pollBootPill();
       }
     });
     mo.observe(document.body,{attributes:true,attributeFilter:['class']});

@@ -61,14 +61,16 @@ html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;height
 }
 body{background:#0d0d0d;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100%;min-height:100vh;min-height:100dvh;padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(24px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));font-family:var(--font-text);color:var(--text-primary);cursor:default;}
 input[type="text"],input[type="search"],textarea{cursor:text;}
-.sw-bar{display:flex;gap:4px;background:transparent;border-radius:100px;padding:4px;margin-bottom:20px;overflow-x:auto;scrollbar-width:none;}
+.sw-bar{position:relative;display:flex;gap:4px;background:transparent;border-radius:100px;padding:4px;margin-bottom:20px;overflow-x:auto;scrollbar-width:none;}
 .sw-bar::-webkit-scrollbar{display:none;}
-.sw{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:transparent;border:none;border-radius:100px;padding:8px 14px;font-family:var(--font-text);font-size:var(--body-xs-size);line-height:var(--body-xs-line);letter-spacing:var(--body-xs-track);font-weight:500;color:rgba(255,255,255,.45);cursor:default;transition:background 220ms cubic-bezier(0.25,0.46,0.45,0.94),color 220ms cubic-bezier(0.25,0.46,0.45,0.94),backdrop-filter 220ms ease;white-space:nowrap;}
+.sw-pill{position:absolute;left:0;top:0;z-index:0;border-radius:100px;background:rgba(255,255,255,.15);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);pointer-events:none;will-change:transform,width,height;box-sizing:border-box;transition:transform 0.48s cubic-bezier(0.22,1,0.36,1),width 0.48s cubic-bezier(0.22,1,0.36,1),height 0.48s cubic-bezier(0.22,1,0.36,1);}
+.sw-pill.sw-pill--no-motion{transition:none!important;}
+.sw{display:inline-flex;align-items:center;justify-content:center;gap:8px;position:relative;z-index:1;background:transparent;border:none;border-radius:100px;padding:8px 14px;font-family:var(--font-text);font-size:var(--body-xs-size);line-height:var(--body-xs-line);letter-spacing:var(--body-xs-track);font-weight:500;color:rgba(255,255,255,.45);cursor:default;transition:color 0.48s cubic-bezier(0.22,1,0.36,1);white-space:nowrap;}
 .sw>i.fas,.sw>i.far{font-size:13px;line-height:1;opacity:.9;width:1.2em;text-align:center;-webkit-font-smoothing:antialiased;flex-shrink:0;}
 .sw-bar .sw>i.fas,.sw-bar .sw>i.far{font-family:"Font Awesome 6 Free",sans-serif!important;}
 .sw-bar .sw>i.fas{font-weight:900!important;}
 .sw-bar .sw>i.far{font-weight:400!important;}
-.sw.on{background:rgba(255,255,255,.15);color:#fff;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);}
+.sw.on{color:#fff;}
 .bezel-container{position:relative;width:450px;height:920px;}
 .bezel-overlay{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:220;display:block;filter:drop-shadow(0 48px 96px rgba(0,0,0,.8));}
 .ph{width:402px;height:874px;background:#000;overflow:hidden;position:absolute;top:23px;left:24px;border-radius:44px;--notch-pad:14px;}
@@ -524,4 +526,4 @@ input[type="text"],input[type="search"],textarea{cursor:text;}
 body.proto-loading .sw-bar,body.proto-loading .bezel-container{opacity:0;filter:blur(22px) saturate(0.92);transform:scale(.8);pointer-events:none;will-change:opacity,filter,transform;}
 body.proto-ready .sw-bar,body.proto-ready .bezel-container{opacity:1;filter:blur(0) saturate(1);transform:scale(1);transition:opacity .95s cubic-bezier(.22,1,.36,1),filter .95s cubic-bezier(.22,1,.36,1),transform 1s cubic-bezier(.34,1.2,.64,1);pointer-events:auto;}
 body.proto-ready #proto-boot{opacity:0;visibility:hidden;pointer-events:none;}
-@media (prefers-reduced-motion:reduce){body.proto-ready .sw-bar,body.proto-ready .bezel-container{transition-duration:.01ms}#proto-boot.proto-boot{transition-duration:.01ms}#proto-boot .loader{animation-duration:.01ms}}
+@media (prefers-reduced-motion:reduce){body.proto-ready .sw-bar,body.proto-ready .bezel-container{transition-duration:.01ms}#proto-boot.proto-boot{transition-duration:.01ms}#proto-boot .loader{animation-duration:.01ms}.sw-pill{transition-duration:.01ms!important}.sw{transition-duration:.01ms!important}}

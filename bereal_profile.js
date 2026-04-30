@@ -184,6 +184,28 @@ function shuffleProfileImages(){
     SELFIE_PATHS=shuffledSelfies.slice();
   }
 }
+var swPillSynced=false;
+function syncSwPill(opts){
+  var bar=document.getElementById('sw-bar');
+  var pill=bar&&bar.querySelector('.sw-pill');
+  var active=bar&&bar.querySelector('.sw.on');
+  if(!bar||!pill||!active)return;
+  var instant;
+  if(opts&&opts.instant===true)instant=true;
+  else if(opts&&opts.instant===false)instant=false;
+  else if(!swPillSynced){ instant=true; swPillSynced=true; }
+  else instant=false;
+  if(instant)pill.classList.add('sw-pill--no-motion');
+  var br=bar.getBoundingClientRect();
+  var ar=active.getBoundingClientRect();
+  pill.style.width=ar.width+'px';
+  pill.style.height=ar.height+'px';
+  pill.style.transform='translate('+(ar.left-br.left)+'px,'+(ar.top-br.top)+'px)';
+  if(instant){
+    pill.offsetHeight;
+    pill.classList.remove('sw-pill--no-motion');
+  }
+}
 function showScreen(id){
   var screenId=id==='nonfriend-private'?'nonfriend':id;
   var brd=document.getElementById('br-detail');
@@ -200,6 +222,7 @@ function showScreen(id){
   clearAllStoryTimers();
   startStoryAutoplay(screenId);
   savePrototypeState();
+  syncSwPill();
 }
 var CAR={mine:{cur:0,n:5,selfies:MY_SELFIES},friend:{cur:0,n:3,selfies:FR_SELFIES},nonfriend:{cur:0,n:0,selfies:{}},official:{cur:0,n:0,selfies:{}}};
 var SWAP_STATE={mine:{},friend:{},nonfriend:{},official:{}};
@@ -1098,6 +1121,16 @@ var HIGHLIGHTS={
 };
 BASE_MINE_HIGHLIGHTS=cloneJson(HIGHLIGHTS.mine);
 restorePrototypeState();
+(function(){
+  var bar=document.getElementById('sw-bar');
+  if(!bar)return;
+  function snapPill(){ syncSwPill({instant:true}); }
+  window.addEventListener('resize',snapPill);
+  bar.addEventListener('scroll',function(){ requestAnimationFrame(snapPill); },{passive:true});
+  if(document.fonts&&document.fonts.ready){
+    document.fonts.ready.then(function(){ requestAnimationFrame(snapPill); });
+  }
+})();
 function escJsStr(s){
   return String(s).replace(/\\/g,'\\\\').replace(/'/g,"\\'");
 }

@@ -184,19 +184,14 @@ function shuffleProfileImages(){
     SELFIE_PATHS=shuffledSelfies.slice();
   }
 }
-var swPillSynced=false;
+/** Profile tab pill: position/size under active .sw. Pass { instant: true } for resize, boot, restore — otherwise the pill animates. */
 function syncSwPill(opts){
   var bar=document.getElementById('sw-bar');
   var pill=bar&&bar.querySelector('.sw-pill');
   var active=bar&&bar.querySelector('.sw.on');
   if(!bar||!pill||!active)return;
-  // Boot overlay scales .sw-bar (transform); measuring now would freeze wrong width/position.
   if(document.body.classList.contains('proto-loading'))return;
-  var instant;
-  if(opts&&opts.instant===true)instant=true;
-  else if(opts&&opts.instant===false)instant=false;
-  else if(!swPillSynced){ instant=true; swPillSynced=true; }
-  else instant=false;
+  var instant=opts&&opts.instant===true;
   if(instant)pill.classList.add('sw-pill--no-motion');
   var br=bar.getBoundingClientRect();
   var ar=active.getBoundingClientRect();
@@ -224,7 +219,7 @@ function showScreen(id,opts){
   clearAllStoryTimers();
   startStoryAutoplay(screenId);
   savePrototypeState();
-  syncSwPill();
+  syncSwPill({instant: !!(opts&&opts.fromRestore)});
   if(!(opts&&opts.fromRestore)){
     var pil=document.querySelector('.sw-pill');
     if(pil)pil.classList.remove('sw-pill--await-boot');

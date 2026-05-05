@@ -1,14 +1,15 @@
 /*
- * PROFILE SELECTOR — liquid-metal BORDER ONLY (metal.jakubantalik.com style)
+ * PROFILE SELECTOR — animated metal BORDER ONLY
  *
- * The frosted fill lives on .sw-pill and is NEVER animated.
- * All motion is on .sw-pill::before: a masked gradient ring only (border-beam–style flow).
+ * Fill on .sw-pill is static (frosted + blur). Motion is ONLY on ::before.
+ * Uses conic-gradient + rotate (visible motion); thin linear drift was imperceptible on a 1px ring.
  *
- * REVERT: Delete this file AND remove the <link href="bereal_profile.metal-tabs.css?…"> line from bereal_profile.html (search "metal-tabs").
+ * REVERT: Delete this file AND remove the <link href="bereal_profile.metal-tabs.css?…"> from bereal_profile.html (search "metal-tabs").
  */
 
-/* Static interior — same as base prototype; no animation property here */
 body.proto-ready #sw-bar .sw-pill{
+  overflow: visible;
+  isolation: isolate;
   border: none;
   background: rgba(255,255,255,.15);
   backdrop-filter: blur(12px);
@@ -20,47 +21,47 @@ body.proto-ready #sw-bar .sw-pill{
     0 4px 20px rgba(0,0,0,.28);
 }
 
-/*
- * Rim only: gradient + mask composite “subtract” inner = ring.
- * ONLY this pseudo-element animates (background-position drift along the stroke).
- */
+/* Chromatic rim: conic metal + spin; mask punches hole so only stroke shows */
 body.proto-ready #sw-bar .sw-pill::before{
   content: '';
   position: absolute;
-  inset: -1px;
+  inset: -2px;
   border-radius: inherit;
-  padding: 1px;
+  padding: 2px;
   box-sizing: border-box;
   pointer-events: none;
   z-index: 1;
-  background: linear-gradient(
-    118deg,
-    rgba(255,255,255,.98) 0%,
-    rgba(165,198,255,.92) 12%,
-    rgba(88,96,118,.96) 26%,
-    rgba(228,206,178,.78) 40%,
-    rgba(252,253,255,.98) 52%,
-    rgba(74,82,102,.94) 66%,
-    rgba(205,212,228,.93) 80%,
-    rgba(185,192,208,.96) 100%
+  transform-origin: center center;
+  will-change: transform;
+  background: conic-gradient(
+    from 0deg at 50% 50%,
+    #ffffff 0deg,
+    #b8c8e8 40deg,
+    #5c6478 80deg,
+    #f0e0d0 120deg,
+    #fafcff 160deg,
+    #6a7488 200deg,
+    #dde8f8 240deg,
+    #d4c4b0 280deg,
+    #ffffff 320deg,
+    #a8b4cc 360deg
   );
-  background-size: 380% 380%;
-  background-position: 12% 45%;
+  /* Ring = subtract inner from outer (same pattern as gradient-border recipes) */
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   mask-composite: exclude;
-  animation: metal-tab-border-flow 11s linear infinite;
+  animation: metal-tab-ring-spin 12s linear infinite;
 }
 
-@keyframes metal-tab-border-flow{
-  0%{ background-position: 10% 38%; }
-  100%{ background-position: 90% 62%; }
+@keyframes metal-tab-ring-spin{
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 @media (prefers-reduced-motion: reduce){
   body.proto-ready #sw-bar .sw-pill::before{
     animation: none;
-    background-position: 48% 48%;
+    transform: rotate(0deg);
   }
 }

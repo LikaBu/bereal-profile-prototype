@@ -1,0 +1,41 @@
+/*
+ * PROFILE SELECTOR — METAL / CHROMATIC SILVER PILL (jakubantalik.com / metal-fx inspired)
+ *
+ * REVERT: Delete this file AND remove the <link href="bereal_profile.metal-tabs.css?…"> line from bereal_profile.html (search "metal-tabs").
+ * Nothing else depends on this stylesheet.
+ */
+
+body.proto-ready #sw-bar .sw-pill{
+  background:
+    linear-gradient(175deg, rgba(255,255,255,.38) 0%, rgba(255,255,255,.08) 38%, rgba(255,255,255,0) 52%),
+    linear-gradient(118deg,
+      #6d717b 0%,
+      #b4b8c4 14%,
+      #eef0f6 28%,
+      #9ea2ae 42%,
+      #d8dce6 56%,
+      #7a7e8a 72%,
+      #c2c6d2 88%,
+      #4f535f 100%);
+  background-size: 100% 55%, 280% 280%;
+  background-position: 50% 0%, 0% 50%;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,.75),
+    inset 0 -2px 6px rgba(0,0,0,.28),
+    0 2px 8px rgba(0,0,0,.35);
+  animation: metal-tab-sheen 9s ease-in-out infinite;
+}
+
+@keyframes metal-tab-sheen{
+  0%,100%{ background-position: 50% 0%, 8% 42%; }
+  50%{ background-position: 50% 0%, 92% 58%; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  body.proto-ready #sw-bar .sw-pill{
+    animation: none;
+    background-position: 50% 0%, 48% 50%;
+  }
+}

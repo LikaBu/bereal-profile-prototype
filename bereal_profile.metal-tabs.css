@@ -1,47 +1,66 @@
 /*
- * PROFILE SELECTOR — METAL BORDER ONLY (chromatic rim like metal/jakubantalik-style pills)
- * Inner fill stays the default frosted pill; only the 1px rim is animated metal.
+ * PROFILE SELECTOR — liquid-metal BORDER ONLY (metal.jakubantalik.com style)
+ *
+ * The frosted fill lives on .sw-pill and is NEVER animated.
+ * All motion is on .sw-pill::before: a masked gradient ring only (border-beam–style flow).
  *
  * REVERT: Delete this file AND remove the <link href="bereal_profile.metal-tabs.css?…"> line from bereal_profile.html (search "metal-tabs").
  */
 
+/* Static interior — same as base prototype; no animation property here */
 body.proto-ready #sw-bar .sw-pill{
-  border: 1px solid transparent;
-  box-sizing: border-box;
-  background:
-    linear-gradient(rgba(255,255,255,.15),rgba(255,255,255,.15)) padding-box,
-    linear-gradient(
-      118deg,
-      rgba(255,255,255,.92) 0%,
-      rgba(160,195,255,.88) 14%,
-      rgba(110,118,135,.95) 28%,
-      rgba(215,190,155,.72) 42%,
-      rgba(248,250,255,.95) 56%,
-      rgba(95,105,125,.9) 70%,
-      rgba(210,215,230,.88) 84%,
-      rgba(175,180,195,.92) 100%
-    ) border-box;
-  background-clip: padding-box, border-box;
-  -webkit-background-clip: padding-box, border-box;
-  background-size: 100% 100%, 280% 280%;
-  background-position: 0 0, 6% 38%;
+  border: none;
+  background: rgba(255,255,255,.15);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+  box-sizing: border-box;
   box-shadow:
     0 0 0 1px rgba(0,0,0,.22) inset,
-    0 2px 18px rgba(255,255,255,.07),
-    0 4px 22px rgba(0,0,0,.32);
-  animation: metal-tab-border-sheen 9s ease-in-out infinite;
+    0 2px 14px rgba(255,255,255,.06),
+    0 4px 20px rgba(0,0,0,.28);
 }
 
-@keyframes metal-tab-border-sheen{
-  0%,100%{ background-position: 0 0, 4% 32%; }
-  50%{ background-position: 0 0, 96% 68%; }
+/*
+ * Rim only: gradient + mask composite “subtract” inner = ring.
+ * ONLY this pseudo-element animates (background-position drift along the stroke).
+ */
+body.proto-ready #sw-bar .sw-pill::before{
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  box-sizing: border-box;
+  pointer-events: none;
+  z-index: 1;
+  background: linear-gradient(
+    118deg,
+    rgba(255,255,255,.98) 0%,
+    rgba(165,198,255,.92) 12%,
+    rgba(88,96,118,.96) 26%,
+    rgba(228,206,178,.78) 40%,
+    rgba(252,253,255,.98) 52%,
+    rgba(74,82,102,.94) 66%,
+    rgba(205,212,228,.93) 80%,
+    rgba(185,192,208,.96) 100%
+  );
+  background-size: 380% 380%;
+  background-position: 12% 45%;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  animation: metal-tab-border-flow 11s linear infinite;
+}
+
+@keyframes metal-tab-border-flow{
+  0%{ background-position: 10% 38%; }
+  100%{ background-position: 90% 62%; }
 }
 
 @media (prefers-reduced-motion: reduce){
-  body.proto-ready #sw-bar .sw-pill{
+  body.proto-ready #sw-bar .sw-pill::before{
     animation: none;
-    background-position: 0 0, 50% 48%;
+    background-position: 48% 48%;
   }
 }
